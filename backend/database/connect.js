@@ -14,6 +14,13 @@ db.getConnection( (err, connection)=> {
     console.log ("Database connected successful.")
 })
 
+const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
+const queryReg = "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";
+const queryParameterize =  /^[A-Za-z0-9]+$/;
+
 module.exports = {
     db,
+    queryLogin,
+    queryParameterize,
+    queryReg,
 }

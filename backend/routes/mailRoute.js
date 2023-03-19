@@ -1,43 +1,45 @@
 const nodemailer = require("nodemailer");
-const {user, pass} = require("../config/configENV");
 const express = require('express');
 const router = express.Router();
 const middleware = require('../config/middleware')
+const {user, pass, service} = require("../config/configENV");
 router.use(middleware);
 
 router.get('/', (req, res)=>{
     res.status(200).render('home', {layout : 'contact'});
-})
+});
 
-router.post('/', (req, res)=>{
+router.post('/', async (req, res)=>{
+    const { email, name, subject, message } = req.body;
+    if (!email || !name || !subject || !message) {
+        return res.status(400).send('Some fields are missing');
+    }
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: service,
         auth: {
             user: user,
             pass: pass
         }
     });
     const mailOptions = {
-        from: req.body.email,
+        from: email,
         to: user,
-        subject: `Meesage from ${req.body.email}: ${req.body.subject}`,
-
+        subject: `Meesage from ${email}: ${subject}`,
         text:
-            `Email sender: ${req.body.email}		
-Name of sender: ${req.body.name}
-Subject: ${req.body.subject}\n
-Message:\n ${req.body.message}.`
+            `Email sender: ${email}		
+            Name of sender: ${name}
+            Subject: ${subject}\n
+            Message:\n ${message}.`
     };
 
-    transporter.sendMail(mailOptions, (error, info)=>{
-        if (error) {
-            console.log(error);
-            res.status(500).send('error');
-        } else {
-            console.log('Email sent to ' + mailOptions.to);
-            res.status(200).send('success');
-        }
-    });
-})
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log('Email sent to ' + mailOptions.to);
+        res.status(200).send('success');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('An error occurred while sending the email');
+    }
+});
 
 module.exports = router;

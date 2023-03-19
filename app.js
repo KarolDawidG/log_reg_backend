@@ -17,7 +17,6 @@ app.use('/auth', logRoute );
 app.use('/logout', logoutRoute);
 app.use('/register', regRoute );
 app.use('/form', mailRoute );
-
 app.use(limiter);
 app.use(middleware);
 
@@ -26,5 +25,4 @@ app.get('/', (req, res) => {
 	res.status(200).render('home', {layout : 'login'});
 });
 
-console.log('Start...');
-app.listen(PORT, ()=>{console.log(`Server Started on port ${PORT}`)});
+app.listen(PORT, ()=>{console.log(`Server Started correctly on port ${PORT}`)});

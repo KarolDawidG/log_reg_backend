@@ -1,5 +1,5 @@
 const express = require('express');
-const {db} = require("../database/connect");
+const {db, queryLogin, queryParameterize} = require("../database/connect");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const middleware = require('../config/middleware')
@@ -22,9 +22,6 @@ router.get('/', checkLoggedIn, (req, res) => {
 router.post("/", (req, res)=> {
     const user = req.body.username;
     const password = req.body.password;
-    const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
-    const queryParameterize =  /^[A-Za-z0-9]+$/;
-
     if (!user || !password) {
         return res.status(400).send('Username and password are required');
     }
@@ -35,7 +32,6 @@ router.post("/", (req, res)=> {
                 console.error(error);
                 res.status(500).send('Error retrieving user from database');
             }
-
             if (results.length === 0) {
                 res.status(401).render('home', {layout : 'wrongUser'});
             } else {
@@ -51,7 +47,7 @@ router.post("/", (req, res)=> {
                         req.session.loggedin = true;
                         req.session.user = user;
                         res.cookie('user', user);
-                        console.log('Login successful');
+                        console.log(`Login of user '${user}' completed successfully`);
                         res.status(200).render('home', {layout : 'home'});
                     }
                 });
