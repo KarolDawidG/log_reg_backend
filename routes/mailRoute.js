@@ -7,7 +7,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 router.get('/', (req, res)=>{
-    res.status(200).res.render('home', {layout : 'contact'});
+    res.status(200).render('home', {layout : 'contact'});
 })
 
 router.post('/', (req, res)=>{
@@ -33,10 +33,10 @@ Message:\n ${req.body.message}.`
     transporter.sendMail(mailOptions, (error, info)=>{
         if (error) {
             console.log(error);
-            res.send('error');
+            res.status(500).send('error');
         } else {
             console.log('Email sent to ' + mailOptions.to);
-            res.send('success');
+            res.status(200).send('success');
         }
     });
 })

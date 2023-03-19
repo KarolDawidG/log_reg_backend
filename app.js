@@ -23,7 +23,7 @@ app.use(limiter);
 app.use(session({secret: SECRET,
 						resave: true,
 						saveUninitialized: true,
-						cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000
+						cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000, semSite:'strict'
 }}));
 
 app.use(express.json());

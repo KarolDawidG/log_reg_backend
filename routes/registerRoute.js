@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 router.get('/', (req, res)=>{
-    res.status(200).res.render('home', {layout : 'register'});
+    res.status(200).render('home', {layout : 'register'});
 });
 
 router.post("/", async (req,res) => {
@@ -16,9 +16,9 @@ router.post("/", async (req,res) => {
         const hashPassword = await bcrypt.hash(req.body.password, 10);
         db.query(`INSERT INTO accounts (username, password, email) VALUES ("${username}", "${hashPassword}","${email}")`);
         console.log("Register Successful");
-        res.redirect('/');
+        res.status(200).redirect('/');
     }catch{
-        res.send('Jakis blad');
+        res.status(500).send('Jakis blad');
     }
 });
 

@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
         }
         console.log('User has logged out');
         res.clearCookie('user');
-        res.redirect('/');
+        res.status(200).redirect('/');
     });
 });
 
