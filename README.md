@@ -12,8 +12,9 @@ The plans include:
 To instal app:
 1. npm init -y
 2. npm install bcrypt cookie-parser dotenv express express-handlebars express-rate-limit express-session mysql2 nodemailer nodemon
-3. to scripts add "start": "node app.js"
-4. to set database write:
+3. you need to add and configure env file
+4. to scripts add "start": "node app.js"
+5. to set database write:
 
 CREATE DATABASE IF NOT EXISTS `nodelogin` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `nodelogin`;
