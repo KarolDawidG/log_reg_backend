@@ -4,10 +4,37 @@ For now we have:
 1. The login panel that reads data from the MySQL database.
 2. A contact form that allows you to send an email from a website visitor.
 3. After logging in, you can use a simple component to generate a new password.
-
+4. Simple user registration panel.
 
 The plans include:
-1. Registration panel.
-2. Unspecified features to improve backend skill.
+1. Unspecified features to improve backend skill.
 
+To instal app:
+1. npm init -y
+2. npm install bcrypt cookie-parser dotenv express express-handlebars express-rate-limit express-session mysql2 nodemailer nodemon
+3. to scripts add "start": "node app.js"
+4. to set database write:
+
+CREATE DATABASE IF NOT EXISTS `nodelogin` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `nodelogin`;
+
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
+for example: INSERT INTO accounts (username,password,email) values ('angela','jolina','angela@gmail.com');
+or
+INSERT INTO accounts (username,password,email) values ('Dupa','dupa','dupa@gmail.com');
+*/
+
+//How to get to database in cmd?
+// 1. mysql -u root -p (then type the password)
+// 2. SHOW DATABASES;
+// 3. USE nodelogin;
+// 4. SELECT * FROM accounts;
 This project has only one direct purpose, learning to code.
