@@ -12,6 +12,7 @@ The plans include:
 To instal app:
 1. npm init -y
 2. npm install bcrypt cookie-parser dotenv express express-handlebars express-rate-limit express-session mysql2 nodemailer nodemon
+    or npm install package.json
 3. you need to add and configure env file
 4. to scripts add "start": "node app.js"
 5. to set database write:
