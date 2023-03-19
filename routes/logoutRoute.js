@@ -9,7 +9,7 @@ router.use(session({
     secret: SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 24 * 60 * 60 * 500 }
+    cookie: { secure: true, maxAge: 24 * 60 * 60 * 500, semSite:'strict' }
 }));
 
 router.get('/', (req, res, next) => {

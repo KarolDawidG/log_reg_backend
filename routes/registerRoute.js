@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 router.get('/', (req, res)=>{
-    res.render('home', {layout : 'register'});
+    res.status(200).res.render('home', {layout : 'register'});
 });
 
 router.post("/", async (req,res) => {
