@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const { SECRET } = require('../config/configENV');
+const { SECRET } = require('./configENV');
 const cookieParser = require("cookie-parser");
 
 const middleware = express.Router();
