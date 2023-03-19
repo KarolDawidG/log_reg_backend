@@ -1,7 +1,6 @@
 const mysql = require("mysql2");
 const {hostDB, userDB, passDB, nameDB} = require("../config/configENV");
 
-
 const db = mysql.createPool({
     connectionLimit: 100,
     host     : hostDB,
@@ -14,8 +13,6 @@ db.getConnection( (err, connection)=> {
     if (err) throw (err)
     console.log ("Database connected successful.")
 })
-
-
 
 module.exports = {
     db,

@@ -2,26 +2,10 @@ const express = require('express');
 const {db} = require("../database/connect");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-const session = require('express-session');
-const {SECRET} = require("../config/configENV");
-const cookieParser = require("cookie-parser");
+const middleware = require('../config/middleware')
+const {checkLoggedIn} = require('../config/config');
 
-const checkLoggedIn = (req, res, next) => {
-    if (!req.session.user && !req.cookies.user) {
-        return res.status(401).render('home', {layout : 'beLogin'});
-    }
-    next();
-};
-
-router.use(cookieParser());
-router.use(express.urlencoded({ extended: true }));
-router.use(session({
-    secret: SECRET,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000, semiSite: 'strict' }
-}));
-
+router.use(middleware);
 
 router.get('/', checkLoggedIn, (req, res) => {
     if (req.session.user) {
@@ -38,19 +22,19 @@ router.get('/', checkLoggedIn, (req, res) => {
 router.post("/", (req, res)=> {
     const user = req.body.username;
     const password = req.body.password;
+    const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
+    const queryParameterize = /^[0-9a-fA-F]{24}$/;
 
     if (!user || !password) {
         return res.status(400).send('Username and password are required');
     }
-
-    db.query(
-        'SELECT * FROM accounts WHERE username = ?',
-        [user],
-        (error, results) => {
+    if (!queryLogin.match(queryParameterize)) {
+        db.query(queryLogin, [user], (error, results) => {
             if (error) {
                 console.error(error);
                 res.status(500).send('Error retrieving user from database');
             }
+
             if (results.length === 0) {
                 res.status(401).render('home', {layout : 'wrongUser'});
             } else {
@@ -58,7 +42,7 @@ router.post("/", (req, res)=> {
                 bcrypt.compare(password, hashedPassword, (error, result) => {
                     if (error) {
                         console.error(error);
-                        res.status(500).render('home', {layout : 'wrongPass'});
+                        res.status(500).send('Error retrieving password from database');
                     }
                     if (!result) {
                         res.status(401).render('home', {layout : 'wrongPass'});
@@ -71,11 +55,11 @@ router.post("/", (req, res)=> {
                     }
                 });
             }
+        });
 
-        }
-    );
+    } else {
+        res.status(400).send('Abnormalities');
+    }
 });
-
-
 
 module.exports = router;

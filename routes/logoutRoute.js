@@ -1,16 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const session = require('express-session');
-const { SECRET } = require("../config/configENV");
-const cookieParser = require("cookie-parser");
-
-router.use(cookieParser());
-router.use(session({
-    secret: SECRET,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { secure: true, maxAge: 24 * 60 * 60 * 500, semSite:'strict' }
-}));
+const middleware = require('../config/middleware')
+router.use(middleware);
 
 router.get('/', (req, res, next) => {
     req.session.user = null;

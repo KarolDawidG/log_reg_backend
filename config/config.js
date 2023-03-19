@@ -5,7 +5,15 @@ const limiter = rateLimit({
     max: 100,                // limit each IP to 100 per windowMs
 });
 
+const checkLoggedIn = (req, res, next) => {
+    if (!req.session.user && !req.cookies.user) {
+        return res.status(401).render('home', {layout : 'beLogin'});
+    }
+    next();
+};
+
 module.exports = {
     limiter,
+    checkLoggedIn,
 
 };

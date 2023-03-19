@@ -1,10 +1,10 @@
 const express = require('express');
 const {db} = require("../database/connect");
 const bcrypt = require("bcrypt");
+const middleware = require("../config/middleware");
 const router = express.Router();
+router.use(middleware);
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
 router.get('/', (req, res)=>{
     res.status(200).render('home', {layout : 'register'});
 });

@@ -2,9 +2,8 @@ const nodemailer = require("nodemailer");
 const {user, pass} = require("../config/configENV");
 const express = require('express');
 const router = express.Router();
-
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
+const middleware = require('../config/middleware')
+router.use(middleware);
 
 router.get('/', (req, res)=>{
     res.status(200).render('home', {layout : 'contact'});
