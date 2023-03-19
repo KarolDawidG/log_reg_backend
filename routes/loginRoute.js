@@ -23,12 +23,13 @@ router.post("/", (req, res)=> {
     const user = req.body.username;
     const password = req.body.password;
     const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
-    const queryParameterize = /^[0-9a-fA-F]$/;
+    const queryParameterize =  /^[A-Za-z0-9]+$/;
 
     if (!user || !password) {
         return res.status(400).send('Username and password are required');
     }
-    if (!queryLogin.match(queryParameterize)) {
+    // simple SQL Injection prevention
+    if (user.match(queryParameterize)) {
         db.query(queryLogin, [user], (error, results) => {
             if (error) {
                 console.error(error);
@@ -58,7 +59,7 @@ router.post("/", (req, res)=> {
         });
 
     } else {
-        res.status(400).send('Abnormalities');
+        res.status(400).send('You can\'t just do a SQL Injection attack and think everything is fine');
     }
 });
 
