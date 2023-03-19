@@ -11,7 +11,7 @@ const regRoute = require('./routes/registerRoute');
 const mailRoute = require('./routes/mailRoute');
 const logoutRoute = require('./routes/logoutRoute');
 
-app.use('/auth', logRoute );		//find bugs here
+app.use('/auth', logRoute );
 app.use('/logout', logoutRoute);
 app.use('/register', regRoute );
 app.use('/form', mailRoute );
@@ -27,7 +27,7 @@ app.use(session({secret: SECRET,
 }}));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 	//dodac aby odczytac dane z formularza
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // main menu			////////////////////////////////////////////////////////////////////////////////////////////////
