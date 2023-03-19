@@ -23,7 +23,7 @@ router.post("/", (req, res)=> {
     const user = req.body.username;
     const password = req.body.password;
     const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
-    const queryParameterize = /^[0-9a-fA-F]{24}$/;
+    const queryParameterize = /^[0-9a-fA-F]$/;
 
     if (!user || !password) {
         return res.status(400).send('Username and password are required');
