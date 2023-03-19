@@ -1,0 +1,25 @@
+{
+  "name": "simplybackendapp-main",
+  "version": "1.0.0",
+  "description": "For now we have: 1. The login panel that reads data from the MySQL database. 2. A contact form that allows you to send an email from a website visitor. 3. After logging in, you can use a simple component to generate a new password.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.2",
+    "express-rate-limit": "^6.7.0",
+    "express-session": "^1.17.3",
+    "mysql2": "^3.2.0",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.21"
+  }
+}
