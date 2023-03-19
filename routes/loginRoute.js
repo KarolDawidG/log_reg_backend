@@ -19,7 +19,7 @@ router.use(session({
     secret: SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000, semSite:'strict' }
+    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000, semiSite: 'strict' }
 }));
 
 
@@ -40,7 +40,7 @@ router.post("/", (req, res)=> {
     const password = req.body.password;
 
     if (!user || !password) {
-        res.status(400).send('Username and password are required');
+        return res.status(400).send('Username and password are required');
     }
 
     db.query(
@@ -53,23 +53,25 @@ router.post("/", (req, res)=> {
             }
             if (results.length === 0) {
                 res.status(401).render('home', {layout : 'wrongUser'});
+            } else {
+                const hashedPassword = results[0].password;
+                bcrypt.compare(password, hashedPassword, (error, result) => {
+                    if (error) {
+                        console.error(error);
+                        res.status(500).render('home', {layout : 'wrongPass'});
+                    }
+                    if (!result) {
+                        res.status(401).render('home', {layout : 'wrongPass'});
+                    } else {
+                        req.session.loggedin = true;
+                        req.session.user = user;
+                        res.cookie('user', user);
+                        console.log('Login successful');
+                        res.status(200).render('home', {layout : 'home'});
+                    }
+                });
             }
-            const hashedPassword = results[0].password
-            bcrypt.compare(password, hashedPassword, (error, result) => {
-                if (error) {
-                    console.error(error);
-                    res.status(500).render('home', {layout : 'wrongPass'});
-                }
-                if (!result) {
-                    res.status(401).render('home', {layout : 'wrongPass'});
-                } else {
-                    req.session.loggedin = true;
-                    req.session.user = user;
-                    res.cookie('user', user);
-                    console.log('Login successful');
-                    res.status(200).render('home', {layout : 'home'});
-                }
-            });
+
         }
     );
 });
