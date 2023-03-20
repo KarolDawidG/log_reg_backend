@@ -29,10 +29,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
-for example: INSERT INTO accounts (username,password,email) values ('angela','jolina','angela@gmail.com');
-or
+INSERT INTO accounts (username,password,email) values ('angela','jolina','angela@gmail.com');
 INSERT INTO accounts (username,password,email) values ('Dupa','dupa','dupa@gmail.com');
-*/
 
 //How to get to database in cmd?
 // 1. mysql -u root -p (then type the password)
