@@ -10,9 +10,14 @@ const db = mysql.createPool({
 });
 
 db.getConnection( (err, connection)=> {
-    if (err) throw (err)
-    console.log ("Database connected successful.")
-})
+    if(!err) {
+        console.log(`Database "${nameDB}" connected successful.`);
+    } else {
+        console.log("Error while connecting with database");
+    }
+});
+
+
 
 const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
 const queryReg = "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";

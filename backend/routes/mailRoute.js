@@ -31,10 +31,9 @@ router.post('/', async (req, res)=>{
             Subject: ${subject}\n
             Message:\n ${message}.`
     };
-
     try {
         await transporter.sendMail(mailOptions);
-        console.log('Email sent to ' + mailOptions.to);
+        console.log(`An email from user ${name} (email: ${email}) has been sent to ${mailOptions.to}`);
         res.status(200).send('success');
     } catch (error) {
         console.log(error);

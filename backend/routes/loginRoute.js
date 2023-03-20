@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const router = express.Router();
 const middleware = require('../config/middleware')
 const {checkLoggedIn} = require('../config/config');
-
 router.use(middleware);
 
 router.get('/', checkLoggedIn, (req, res) => {
