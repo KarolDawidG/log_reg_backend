@@ -9,13 +9,17 @@ const db = mysql.createPool({
     database : nameDB
 });
 
-db.getConnection( (err, connection)=> {
-    if(!err) {
-        console.log(`Database "${nameDB}" connected successful.`);
-    } else {
-        console.log("Error while connecting with database");
-    }
-});
+try {
+    db.getConnection((err, connection) => {
+        if (!err) {
+            console.log(`Database "${nameDB}" connected successfully.`);
+        } else {
+            console.log("Error while connecting with database");
+        }
+    });
+} catch (err) {
+    console.error("Error while connecting to the database:", err);
+}
 
 
 
