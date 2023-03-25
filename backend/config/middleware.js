@@ -16,4 +16,5 @@ middleware.use(session({
     cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000, semiSite: 'strict' }
 }));
 
+
 module.exports = middleware;

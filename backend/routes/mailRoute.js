@@ -13,7 +13,8 @@ router.post('/', async (req, res)=>{
     const { email, name, subject, message } = req.body;
     if (!email || !name || !subject || !message) {
         return res.status(400).send('Some fields are missing');
-    }
+    };
+
     const transporter = nodemailer.createTransport({
         service: service,
         auth: {

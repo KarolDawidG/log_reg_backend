@@ -12,8 +12,16 @@ const checkLoggedIn = (req, res, next) => {
     next();
 };
 
+const validatePasswords = (req, res) => {
+    const { password, passwordRep } = req.body;
+    if (password !== passwordRep) {
+        res.status(401).render('home', {layout : 'wrongPass'});
+    }
+};
+
 module.exports = {
     limiter,
     checkLoggedIn,
+    validatePasswords,
 
 };

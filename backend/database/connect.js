@@ -21,8 +21,6 @@ try {
     console.error("Error while connecting to the database:", err);
 }
 
-
-
 const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
 const queryReg = "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";
 const queryParameterize =  /^[A-Za-z0-9]+$/;
