@@ -22,12 +22,14 @@ try {
 }
 
 const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
+const queryEmail = `SELECT * FROM accounts WHERE email = ?`;
 const queryReg = "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";
 const queryParameterize =  /^[A-Za-z0-9]+$/;
 
 module.exports = {
     db,
     queryLogin,
+    queryEmail,
     queryParameterize,
     queryReg,
 }
