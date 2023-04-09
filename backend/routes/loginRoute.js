@@ -45,9 +45,11 @@ router.post("/", (req, res)=> {
                     } else {
                         req.session.loggedin = true;
                         req.session.user = user;
+                        const nameUser = user;
                         res.cookie('user', user);
                         console.log(`Login of user '${user}' completed successfully`);
                         res.status(200).render('home', {layout : 'home'});
+                        console.log(nameUser);
                     }
                 });
             }
@@ -59,3 +61,4 @@ router.post("/", (req, res)=> {
 });
 
 module.exports = router;
+
