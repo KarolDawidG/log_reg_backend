@@ -12,7 +12,6 @@ const checkLoggedIn = (req, res, next) => {
     next();
 };
 
-
 module.exports = {
     limiter,
     checkLoggedIn,

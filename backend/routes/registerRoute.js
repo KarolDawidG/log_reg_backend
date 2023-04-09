@@ -34,27 +34,6 @@ router.post('/', async (req, res) => {
     } else {
         res.status(400).send('You can\'t just do a SQL Injection attack and think everything is fine');
     }
-
-
 });
-
-
-
-
-
-// router.post('/',  async (req, res) => {
-//     const { email, username, password } = req.body;
-//     try {
-//         const hashPassword = await bcrypt.hash(password, 10);
-//         db.query(queryReg, [username, hashPassword, email]);
-//         console.log(`Registration of user '${username}' completed successfully`);
-//         res.status(200).redirect('/');
-//     } catch {
-//         res.status(500).send('Unknown server error. Please contact your administrator.');
-//     }
-// });
-
-
-
 
 module.exports = router;

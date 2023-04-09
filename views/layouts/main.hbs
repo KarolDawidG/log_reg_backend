@@ -1,1 +1,32 @@
-<h1>Nie to chcialem uzyskac</h1>
+<h1>CRUD application</h1>
+<h2>with MERN stack</h2>
+
+<form action="/todo" method="post">
+
+    <label for="nazwa">Nazwa zadania:</label>
+    <input type="text"
+           name="nazwa"
+           placeholder="tytul"
+           required><br>
+
+    <label for="tresc">Treść zadania:</label>
+    <textarea
+            name="tresc"
+            placeholder="tresc"
+            required></textarea><br>
+    <button type="submit">Dodaj</button>
+</form><br>
+<ul>
+    {{#each tasks}}
+        <li>Zadanie: {{this.nazwa}}<br>
+            Treść: {{this.tresc}}<br>
+            <form action="/todo/delete/{{this.id}}" method="post">
+                <button type="submit">Usuń</button>
+            </form>
+        </li>
+    {{/each}}
+</ul>
+
+<form action="/logout" method="get">
+    <input class="btn" type="submit" value="Logout">
+</form>
