@@ -2,12 +2,15 @@
 
 For now we have:
 1. The login panel that reads data from the MySQL database.
-2. A contact form that allows you to send an email from a website visitor.
-3. After logging in, you can use a simple component to generate a new password.
-4. Simple user registration panel.
+2. After logging in, you can choose the project you want to display.
+3. Simple user registration panel.
+4. A contact form that allows you to send an email from a website visitor.
+5. A simple todo list, which is based on a MySql database. It allows to add tasks and display them, depending on which user is logged in.
+6. More small projects will be available soon!
+
 
 The plans include:
-1. Unspecified features to improve backend skill.
+1. Deploying the application to an external server in order to share it with other users for evaluation.
 
 To instal app:
 1. npm init -y
