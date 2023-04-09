@@ -1,3 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/todo.css">
+    <title>Document</title>
+</head>
+<body>
 <h1>CRUD application</h1>
 <h2>with MERN stack</h2>
 
@@ -16,16 +27,18 @@
             required></textarea><br>
     <button type="submit">Dodaj</button>
 </form><br>
-<ul>
+
     {{#each tasks}}
-        <li>Zadanie: {{this.nazwa}}<br>
-            Treść: {{this.tresc}}<br>
-            <form action="/todo/delete/{{this.id}}" method="post">
-                <button type="submit">Usuń</button>
-            </form>
-        </li>
-    {{/each}}
+<ul>
+                  <li>Zadanie: {{this.nazwa}}<br>
+                   Treść: {{this.tresc}}</li>
+
+               <form action="/todo/delete/{{this.id}}" method="post">
+                   <button class="todo" type="submit">Usuń</button>
+               </form>
 </ul>
+    {{/each}}
+
 
 <form action="/auth" method="get">
     <input
@@ -40,3 +53,5 @@
             type="submit"
             value="Logout">
 </form>
+</body>
+</html>
