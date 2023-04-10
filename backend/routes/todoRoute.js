@@ -4,11 +4,13 @@ const middleware = require('../config/middleware')
 const {TaskRecord} = require("../database/TaskRecord");
 const {pool} = require("../database/db");
 router.use(middleware);
+const insertTodo = `INSERT INTO tasks ( nazwa, tresc, user) VALUES (?, ?, ?)`;
+const deleteTodo = `DELETE FROM tasks WHERE id = ?`;
 
 router.get('/', async (req, res, next) => {
     try {
         const tasks = await TaskRecord.listAll(req.cookies["user"]);
-        res.render('layouts/main', {tasks});
+        res.status(200).render('layouts/main', {tasks});
     } catch (error) {
         console.error(error);
         res.status(500).send('Something went wrong');
@@ -20,7 +22,7 @@ router.post('/', async (req, res, next) => {
         const nazwa = req.body.nazwa;
         const tresc = req.body.tresc;
         const nameUser = req.cookies["user"];
-        await pool.execute('INSERT INTO tasks ( nazwa, tresc, user) VALUES (?, ?, ?)', [nazwa, tresc, nameUser]);
+        await pool.execute(insertTodo, [nazwa, tresc, nameUser]);
         res.redirect('/todo');
     } catch (error) {
         console.error(error);
@@ -31,8 +33,8 @@ router.post('/', async (req, res, next) => {
 router.post('/delete/:id', async (req, res, next) => {
     try {
         const id = req.params.id;
-        await pool.execute('DELETE FROM tasks WHERE id = ?', [id]);
-        res.redirect('/todo');
+        await pool.execute(deleteTodo, [id]);
+        res.status(200).redirect('/todo');
     } catch (error) {
         console.error(error);
         res.status(500).send('Something went wrong');

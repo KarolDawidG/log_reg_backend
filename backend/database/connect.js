@@ -11,12 +11,14 @@ const db = mysql.createPool({
 
 try {
     db.getConnection((err, connection) => {
+        //creates the database if it doesn't exist
         if (!err) {
             console.log(`Connected to database successfully.`);
-            connection.query(`CREATE DATABASE IF NOT EXISTS ${nameDB}`, function (err, result) {
+            connection.query(createDatabase, function (err, result) {
                 if (err) throw err;
-                console.log(`Database "${nameDB}" created successfully.`);
+                //the method is used to switch the current connection to the newly created database
                 connection.changeUser({ database: nameDB }, function (err) {
+                    //creates database tables if they don't exist
                     if (err) throw err;
                     databaseSetup(connection);
                 });
@@ -28,18 +30,18 @@ try {
 } catch (err) {
     console.error("Error while connecting to the database:", err);
 }
-
+const createDatabase = `CREATE DATABASE IF NOT EXISTS ${nameDB}`;
 const queryLogin = `SELECT * FROM accounts WHERE username = ?`;
 const queryEmail = `SELECT * FROM accounts WHERE email = ?`;
 const queryReg = "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";
 const queryParameterize =  /^[A-Za-z0-9]+$/;
 
+//creates database tables if they don't exist
 function databaseSetup(connection) {
     const sqlScript = fs.readFileSync('./backend/database/nodelogin.sql', 'utf8');
-
     const sqlStatements = sqlScript.split(';');
+    //we use the pop() method to remove this last empty item from the array with the SQL queries
     sqlStatements.pop();
-
     sqlStatements.forEach(function(statement) {
         connection.query(statement, function (error, results, fields) {
             if (error) {
