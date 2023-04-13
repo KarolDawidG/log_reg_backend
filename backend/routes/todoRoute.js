@@ -2,10 +2,8 @@ const express = require('express');
 const router = express.Router();
 const middleware = require('../config/middleware')
 const {TaskRecord} = require("../database/TaskRecord");
-const {pool} = require("../database/db");
 router.use(middleware);
-const insertTodo = `INSERT INTO tasks ( nazwa, tresc, user) VALUES (?, ?, ?)`;
-const deleteTodo = `DELETE FROM tasks WHERE id = ?`;
+
 
 router.get('/', async (req, res, next) => {
     try {
@@ -22,22 +20,22 @@ router.post('/', async (req, res, next) => {
         const nazwa = req.body.nazwa;
         const tresc = req.body.tresc;
         const nameUser = req.cookies["user"];
-        await pool.execute(insertTodo, [nazwa, tresc, nameUser]);
+        await TaskRecord.insert([nazwa, tresc, nameUser]);
         res.redirect('/todo');
     } catch (error) {
         console.error(error);
-        res.status(500).send('Something went wrong');
+        res.status(500).send('Something went wrong in POST method');
     }
 });
 
 router.post('/delete/:id', async (req, res, next) => {
     try {
         const id = req.params.id;
-        await pool.execute(deleteTodo, [id]);
+        await TaskRecord.delete(id);
         res.status(200).redirect('/todo');
     } catch (error) {
         console.error(error);
-        res.status(500).send('Something went wrong');
+        res.status(500).send('Something went wrong in DELETE method');
     }
 });
 

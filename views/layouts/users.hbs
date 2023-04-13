@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/usersList.css">
+    <title>Users</title>
+</head>
+<body>
+<h1>Lista użytkowników</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Imię</th>
+        <th>E-mail</th>
+        <th>Usun</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each usersList}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.username}}</td>
+            <td>{{this.email}}</td>
+            <td>
+
+                <form action="/users/delete/{{this.id}}" method="POST">
+                    <input class="btn" type="submit" value="Usuń">
+                </form>
+
+            </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<form action="/auth" method="get">
+    <input
+            class="btn"
+            type="submit"
+            value="Go back!">
+</form>
+
+<form action="/logout" method="get">
+    <input
+            class="btn"
+            type="submit"
+            value="Logout">
+</form>
+
+
+</body>
+</html>

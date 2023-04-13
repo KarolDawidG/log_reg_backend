@@ -10,6 +10,7 @@ const regRoute = require('./backend/routes/registerRoute');
 const mailRoute = require('./backend/routes/mailRoute');
 const logoutRoute = require('./backend/routes/logoutRoute');
 const todoRoute = require('./backend/routes/todoRoute');
+const usersRoute = require('./backend/routes/usersRoute');
 
 app.engine('.hbs', hbs.engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
@@ -19,6 +20,8 @@ app.use('/logout', logoutRoute);
 app.use('/register', regRoute );
 app.use('/todo', todoRoute );
 app.use('/form', mailRoute );
+app.use('/users', usersRoute );
+
 app.use(limiter);
 app.use(middleware);
 

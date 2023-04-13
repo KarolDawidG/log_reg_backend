@@ -1,9 +1,10 @@
 const express = require('express');
-const {db, queryLogin, queryParameterize} = require("../database/connect");
+const {UsersRecord} = require("../database/UsersRecord");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const middleware = require('../config/middleware')
 const {checkLoggedIn} = require('../config/config');
+const queryParameterize =  /^[A-Za-z0-9]+$/;
 router.use(middleware);
 
 router.get('/', checkLoggedIn, (req, res) => {
@@ -18,23 +19,18 @@ router.get('/', checkLoggedIn, (req, res) => {
     }
 });
 
-router.post("/", (req, res)=> {
+router.post("/", async (req, res)=> {
     const user = req.body.username;
     const password = req.body.password;
     if (!user || !password) {
         return res.status(400).send('Username and password are required');
     }
-    // simple SQL Injection prevention
-    if (user.match(queryParameterize)) {
-        db.query(queryLogin, [user], (error, results) => {
-            if (error) {
-                console.error(error);
-                res.status(500).send('Error retrieving user from database');
-            }
-            if (results.length === 0) {
+    const ifUser =  await UsersRecord.selectByUsername([user]);
+        if (user.match(queryParameterize)) {
+            if (ifUser.length === 0) {
                 res.status(401).render('home', {layout : 'wrongUser'});
             } else {
-                const hashedPassword = results[0].password;
+                const hashedPassword = ifUser[0].password;
                 bcrypt.compare(password, hashedPassword, (error, result) => {
                     if (error) {
                         console.error(error);
@@ -45,15 +41,11 @@ router.post("/", (req, res)=> {
                     } else {
                         req.session.loggedin = true;
                         req.session.user = user;
-                        const nameUser = user;
-                        res.cookie('user', user);
-                        console.log(`Login of user '${user}' completed successfully`);
+                        res.cookie('user', user, { httpOnly: true });
                         res.status(200).render('home', {layout : 'home'});
-                        console.log(nameUser);
                     }
                 });
-            }
-        });
+            };
 
     } else {
         res.status(400).send('You can\'t just do a SQL Injection attack and think everything is fine');

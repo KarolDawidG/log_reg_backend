@@ -1,8 +1,9 @@
 const express = require('express');
-const {db, queryReg, queryEmail, queryLogin, queryParameterize} = require("../database/connect");
+const {UsersRecord} = require("../database/UsersRecord");
 const bcrypt = require("bcrypt");
 const middleware = require("../config/middleware");
 const router = express.Router();
+const queryParameterize =  /^[A-Za-z0-9]+$/;
 router.use(middleware);
 
 router.get('/', (req, res)=>{
@@ -11,21 +12,17 @@ router.get('/', (req, res)=>{
 
 router.post('/', async (req, res) => {
     const { email, username, password } = req.body;
-    // simple SQL Injection prevention
     if (username.match(queryParameterize)){
         try {
-            //Checking if a user or email address exists in the database
             const userExists = {
-                emailExists: await db.promise().query(queryEmail, [email]),
-                loginExists: await db.promise().query(queryLogin, [username])
+                emailExists: await UsersRecord.selectByEmail([email]),
+                loginExists: await UsersRecord.selectByUsername([username])
             }
-            if (userExists.emailExists[0].length > 0 || userExists.loginExists[0].length > 0 ) {
-                console.log('User with given parameters already exists');
+            if (userExists.emailExists && userExists.emailExists.length > 0 || userExists.loginExists && userExists.loginExists.length > 0 ) {
                 return res.status(401).render('home', {layout : 'repeatedUserEmail'});
             }
             const hashPassword = await bcrypt.hash(password, 10);
-            await db.promise().query(queryReg, [username, hashPassword, email]);
-            console.log(`Registration of user '${username}' completed successfully`);
+            await UsersRecord.insert([username, hashPassword, email]);
             res.status(200).redirect('/');
         } catch (error) {
             console.error(error);
@@ -37,3 +34,4 @@ router.post('/', async (req, res) => {
 });
 
 module.exports = router;
+
