@@ -6,6 +6,7 @@
     <title>Register</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <link href="/css/style.css" rel="stylesheet">
+   
 </head>
 <body>
 
@@ -13,38 +14,58 @@
     <h1>REGISTER</h1>
     <form action="/register" method="post">
         <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                id="username"
-                minlength="4"
-                maxlength="12"
-                required ><br><br>
+            type="text"
+            name="username"
+            placeholder="Username"
+            id="username"
+            minlength="4"
+            maxlength="12"
+            required ><br><br>
 
         <input
-                type="text"
-                name="email"
-                placeholder="E-mail"
-                id="email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                required><br><br>
+            type="text"
+            name="email"
+            placeholder="E-mail"
+            id="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            required><br><br>
 
         <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                id="password"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                required><br><br>
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            required><br><br>
+
+        <input
+            type="password"
+            name="password_confirm"
+            placeholder="Confirm password"
+            id="password_confirm"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            oninput="checkPasswordMatch()"
+            required><br><br>
 
         <input type="submit" value="Register">
     </form>
 
     <form action="/" method="get">
-        <input type="submit" value="Logg in">
+        <input type="submit" value="Log in">
     </form>
-
 </div>
+
+<script>
+    function checkPasswordMatch() {
+        const password = document.getElementById("password");
+        const confirm_password = document.getElementById("password_confirm");
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords do not match");
+        } else {
+            confirm_password.setCustomValidity("");
+        }
+    }
+</script>
 
 </body>
 </html>
