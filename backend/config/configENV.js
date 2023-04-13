@@ -9,6 +9,7 @@ module.exports = {
     passDB:process.env.PASS_DB,
     PORT:process.env.PORT,
     SECRET:process.env.SECRET,
+    JWT_SECRET:process.env.JWT_SECRET,
     service:process.env.service,
 };
 

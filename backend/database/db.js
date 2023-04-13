@@ -38,8 +38,6 @@ pool.query('SHOW DATABASES')
   .catch((err) => console.error(err));
   
 
-
-
 const createAccountsTable = async (pool) => {
     try {
       const query = `
