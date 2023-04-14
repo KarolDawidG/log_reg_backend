@@ -17,6 +17,7 @@
         <th>ID</th>
         <th>Imię</th>
         <th>E-mail</th>
+        <th>Rola</th>
         <th>Usun</th>
     </tr>
     </thead>
@@ -26,8 +27,8 @@
             <td>{{this.id}}</td>
             <td>{{this.username}}</td>
             <td>{{this.email}}</td>
+            <td>{{this.role}}</td>
             <td>
-
                 <form action="/users/delete/{{this.id}}" method="POST">
                     <input class="btn" type="submit" value="Usuń">
                 </form>
@@ -38,12 +39,23 @@
     </tbody>
 </table>
 
-<form action="/auth" method="get">
-    <input
-            class="btn"
-            type="submit"
-            value="Go back!">
+ <form action="/update-role" method="post">
+    <label for="username">Username:</label>
+    <select id="username" name="username">
+        {{#each usersList}}
+            <option value="{{this.username}}">{{this.username}}</option>
+        {{/each}}
+    </select>
+    <br>
+    <label for="role">New Role:</label>
+    <select id="role" name="role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select>
+    <br>
+    <input class="btn" type="submit" value="Update role">
 </form>
+
 
 <form action="/logout" method="get">
     <input
@@ -51,7 +63,6 @@
             type="submit"
             value="Logout">
 </form>
-
 
 </body>
 </html>

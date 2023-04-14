@@ -5,6 +5,7 @@ class UsersRecord{
         this.id = obj.id;
         this.username = obj.username;
         this.email = obj.email;
+        this.role = obj.role;
       }
 
     static async listAll(){

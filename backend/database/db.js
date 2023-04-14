@@ -41,16 +41,17 @@ pool.query('SHOW DATABASES')
 const createAccountsTable = async (pool) => {
     try {
       const query = `
-        CREATE TABLE IF NOT EXISTS accounts (
-          id varchar(36) NOT NULL DEFAULT UUID(),
-          username varchar(50) NOT NULL,
-          password varchar(255) NOT NULL,
-          email varchar(100) NOT NULL,
-          PRIMARY KEY (id)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+      CREATE TABLE IF NOT EXISTS accounts (
+        id varchar(36) NOT NULL DEFAULT UUID(),
+        username varchar(50) NOT NULL,
+        password varchar(255) NOT NULL,
+        email varchar(100) NOT NULL,
+        role varchar(20) NOT NULL DEFAULT 'user',
+        PRIMARY KEY (id)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
       `;
       await pool.query(query);
-      console.log('Tabela accounts utworzona.');
+      console.log('Tabela accounts została wczytana.');
     } catch (err) {
       console.error(err);
     }
@@ -68,7 +69,7 @@ const createAccountsTable = async (pool) => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
     `;
       await pool.query(query);
-      console.log('Tabela tasks utworzona.');
+      console.log('Tabela tasks została wczytana.');
     } catch (err) {
       console.error(err);
     }

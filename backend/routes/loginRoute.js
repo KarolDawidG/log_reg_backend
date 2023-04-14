@@ -11,7 +11,6 @@ router.use(middleware);
 
 router.get('/', verifyToken, (req, res) => {
     const token = req.cookies.token;
-
     if (token) {
         jwt.verify(token, JWT_SECRET, (err, decoded) => {
             if (err) {
@@ -49,7 +48,12 @@ router.post("/", async (req, res) => {
                     const token = jwt.sign({ username: user }, JWT_SECRET, { expiresIn: '720s' });
                     res.cookie('token', token, { httpOnly: true });
                     res.cookie('user', user, { httpOnly: true });
-                    res.status(200).render('home', { layout: 'home' });
+                    
+                    if (ifUser[0].role === 'admin') {
+                        res.status(200).render('home', { layout: 'admin' });
+                    } else {
+                        res.status(200).render('home', { layout: 'home' });
+                    }
                 }
             });
         };
