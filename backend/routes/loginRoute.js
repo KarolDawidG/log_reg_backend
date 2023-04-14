@@ -1,18 +1,16 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const {JWT_SECRET} = require('../config/configENV');
 const { UsersRecord } = require("../database/UsersRecord");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const middleware = require('../config/middleware')
-const { verifyToken } = require('../config/config');
-const queryParameterize = /^[A-Za-z0-9]+$/;
+const { verifyToken, publicKey, privateKey, queryParameterize } = require('../config/config');
 router.use(middleware);
 
 router.get('/', verifyToken, (req, res) => {
     const token = req.cookies.token;
     if (token) {
-        jwt.verify(token, JWT_SECRET, (err, decoded) => {
+        jwt.verify(token, publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
             if (err) {
                 console.error(err);
                 res.status(401).render('home', { layout: 'login' });
@@ -26,40 +24,47 @@ router.get('/', verifyToken, (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const user = req.body.username;
-    const password = req.body.password;
-    if (!user || !password) {
-        return res.status(400).send('Username and password are required');
-    }
-    const ifUser = await UsersRecord.selectByUsername([user]);
-    if (user.match(queryParameterize)) {
+    try {
+      const user = req.body.username;
+      const password = req.body.password;
+      if (!user || !password) {
+        return res.status(400).send("Username and password are required");
+      }
+
+      const ifUser = await UsersRecord.selectByUsername([user]);
+      if (user.match(queryParameterize)) {
         if (ifUser.length === 0) {
-            res.status(401).render('home', { layout: 'wrongUser' });
+          return res.status(401).render("home", { layout: "wrongUser" });
+        }
+
+        const hashedPassword = ifUser[0].password;
+        const result = await bcrypt.compare(password, hashedPassword);
+        if (!result) {
+          return res.status(401).render("home", { layout: "wrongPass" });
+        }
+        
+        const payload = { user: "example" };
+        const token = jwt.sign(payload, privateKey, { algorithm: "RS256" });
+        res.cookie("token", token, { httpOnly: true, secure: true, sameSite: 'strict' });
+        res.cookie("user", user, { httpOnly: true, secure: true, sameSite: 'strict' });
+
+        if (ifUser[0].role === "admin") {
+          return res.status(200).redirect('/admin');
         } else {
-            const hashedPassword = ifUser[0].password;
-            bcrypt.compare(password, hashedPassword, (error, result) => {
-                if (error) {
-                    console.error(error);
-                    res.status(500).send('Error retrieving password from database');
-                }
-                if (!result) {
-                    res.status(401).render('home', { layout: 'wrongPass' });
-                } else {
-                    const token = jwt.sign({ username: user }, JWT_SECRET, { expiresIn: '720s' });
-                    res.cookie('token', token, { httpOnly: true });
-                    res.cookie('user', user, { httpOnly: true });
-                    
-                    if (ifUser[0].role === 'admin') {
-                        res.status(200).render('home', { layout: 'admin' });
-                    } else {
-                        res.status(200).render('home', { layout: 'home' });
-                    }
-                }
-            });
-        };
-    } else {
-        res.status(400).send('You can\'t just do a SQL Injection attack and think everything is fine');
+          return res.status(200).render("home", { layout: "home" });
+        }
+      } else {
+        return res
+          .status(400)
+          .send("You can't just do a SQL Injection attack and think everything is fine");
+      }
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .send("Unknown server error. Please contact your administrator.");
     }
-});
+  });
+  
 
 module.exports = router;

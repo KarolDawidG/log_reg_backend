@@ -33,7 +33,22 @@ tbody{
     background-color: grey;
 }
 /* animacja dla przycisków */
-.btn {
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .btnlogout {
+    position: absolute;
+    top: 0;
+    right: 0;
     background-color: #1e90ff;
     color: #fff;
     border: none;
@@ -43,12 +58,31 @@ tbody{
     cursor: pointer;
     font-size: 16px;
     transition: all 0.3s ease;
-}
-
-.btn:hover {
+  }
+  
+  .btnlogout:hover {
     background-color: #fff;
     color: #1e90ff;
-}
+  }
+  
+
+  .btn {
+    background-color: #1e90ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #fff;
+    color: #1e90ff;
+  }
+  
 
 /* stylizacja dla tabeli */
 table {

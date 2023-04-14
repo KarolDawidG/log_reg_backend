@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
         res.status(200).render('layouts/main', {tasks});
     } catch (error) {
         console.error(error);
-        res.status(500).send('Something went wrong');
+        res.status(500).send('Unknown server error. Please contact your administrator.');
     }
 });
 

@@ -3,11 +3,17 @@ const {UsersRecord} = require("../database/UsersRecord");
 const bcrypt = require("bcrypt");
 const middleware = require("../config/middleware");
 const router = express.Router();
-const queryParameterize =  /^[A-Za-z0-9]+$/;
+const { queryParameterize } = require('../config/config');
+
 router.use(middleware);
 
-router.get('/', (req, res)=>{
-    res.status(200).render('home', {layout : 'register'});
+router.get('/', async (req, res)=>{
+    try{
+        res.status(200).render('home', {layout : 'register'});
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Unknown server error. Please contact your administrator.');
+    }
 });
 
 router.post('/', async (req, res) => {

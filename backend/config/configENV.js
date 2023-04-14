@@ -8,7 +8,6 @@ module.exports = {
     userDB:process.env.USER_DB || 'root', 
     passDB:process.env.PASS_DB || '',
     PORT:process.env.PORT || 3000,
-    JWT_SECRET:process.env.JWT_SECRET || 'secret_key',
     service:process.env.service,
 };
 

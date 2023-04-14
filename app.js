@@ -6,6 +6,7 @@ const middleware = require("./backend/config/middleware");
 const app = express();
 
 const logRoute = require('./backend/routes/loginRoute');
+const adminRoute = require('./backend/routes/adminRoute');
 const regRoute = require('./backend/routes/registerRoute');
 const mailRoute = require('./backend/routes/mailRoute');
 const logoutRoute = require('./backend/routes/logoutRoute');
@@ -17,6 +18,7 @@ app.engine('.hbs', hbs.engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 app.use('/auth', logRoute );
+app.use('/admin', adminRoute );
 app.use('/logout', logoutRoute);
 app.use('/register', regRoute );
 app.use('/todo', todoRoute );

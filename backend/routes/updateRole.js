@@ -2,12 +2,15 @@ const express = require('express');
 const {pool} = require('../database/db')
 const middleware = require("../config/middleware");
 const router = express.Router();
-
-
 router.use(middleware);
 
-router.get('/', (req, res)=>{
-    res.status(200).redirect('/');
+router.get('/', async (req, res)=>{
+    try{
+        res.status(200).redirect('/');
+    }catch(error){
+        console.error(error);
+        res.status(500).send('Unknown server error. Please contact your administrator.');
+    }
 });
 
 router.post('/', async (req, res) => {
@@ -23,7 +26,7 @@ router.post('/', async (req, res) => {
         res.status(200).redirect('/users/');
     } catch (error) {
         console.error(error);
-        res.status(400).send('Something bad');
+        res.status(500).send('Unknown server error. Please contact your administrator.');
     }
 });
 

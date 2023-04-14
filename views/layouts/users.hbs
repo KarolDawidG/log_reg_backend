@@ -39,30 +39,32 @@
     </tbody>
 </table>
 
- <form action="/update-role" method="post">
-    <label for="username">Username:</label>
-    <select id="username" name="username">
-        {{#each usersList}}
-            <option value="{{this.username}}">{{this.username}}</option>
-        {{/each}}
-    </select>
-    <br>
-    <label for="role">New Role:</label>
-    <select id="role" name="role">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-    </select>
-    <br>
-    <input class="btn" type="submit" value="Update role">
-</form>
+    <div class="button-container">
+        <form action="/update-role" method="post">
+            <label for="username">Username:</label>
+            <select id="username" name="username">
+                {{#each usersList}}
+                    <option value="{{this.username}}">{{this.username}}</option>
+                {{/each}}
+            </select>
+            <br>
+            <label for="role">New Role:</label>
+            <select id="role" name="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <br>
+            <input class="btn" type="submit" value="Update role">
+        </form>
+    </div>
 
-
-<form action="/logout" method="get">
-    <input
-            class="btn"
-            type="submit"
-            value="Logout">
-</form>
-
+    <div class="container">
+        <form action="/logout" method="get">
+            <input
+                    class="btnlogout"
+                    type="submit"
+                    value="Logout">
+        </form>
+    </div>
 </body>
 </html>
