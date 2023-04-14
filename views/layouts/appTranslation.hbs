@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="/css/appTranslation.css" rel="stylesheet">
+    <title>Przetłumacz na angielski</title>
+  </head>
+  <body>
+    <h1>Tekst do przetłumaczenia:</h1>
+    <button id="go_back" class="btn">Go back!</button>
+    <form action="/translate" method="POST">
+        <input
+            type="text"
+            name="inputText"
+            id="inputText"
+        />
+        <input type="submit" value="Przetłumacz">
+    </form>
+
+    <div id="output"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <button class="btn_clear">Clear all</button>
+    
+<script>
+  $(document).ready(function() {
+    $('#go_back').click(function() {
+      window.location.href = '/auth';
+    });
+
+    $('form').submit(function(event) {      //ustawia funkcję, która zostanie wywołana, kiedy formularz zostanie zatwierdzony
+      event.preventDefault(); //zapobiega przeladowaniu strony
+
+      let inputText = $('#inputText').val(); //pobiera wartość wpisaną w polu tekstowym o id="inputText" i przypisuje ją do zmiennej inputText
+
+      $.post('/translate', {inputText: inputText}, function(data) { //przesyła inputTekst
+        $('#output').text(data.output); //odbiera tlumaczenie przekazuje do output
+      });
+    });
+
+    $('.btn_clear').click(function() {
+      $('#output').empty();
+      $('#inputText').val('');
+    });
+  });
+</script>
+
+
+  </body>
+</html>
