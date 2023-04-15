@@ -9,13 +9,13 @@ class TaskRecord{
     static async insert([nazwa, tresc, nameUser]) {
         const result = await pool.execute("INSERT INTO tasks (nazwa, tresc, user) VALUES (?, ?, ?)", [nazwa, tresc, nameUser]);
         return result.insertId;
-      }
-
-      static async delete(id) {
-         await pool.execute("DELETE FROM tasks WHERE id = ?", [id]);
-      }
-
     }
+
+    static async delete(id) {
+         await pool.execute("DELETE FROM tasks WHERE id = ?", [id]);
+    }
+
+}
 
 module.exports = {
     TaskRecord,
