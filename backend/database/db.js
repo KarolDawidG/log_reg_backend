@@ -1,6 +1,6 @@
 const { createPool } = require('mysql2/promise');
 const { hostDB, userDB, passDB, nameDB } = require('../config/configENV');
-
+const {insertQuery, findRoot, createTasks, createAccounts} = require('./querrys')
 
 const pool = createPool({
   host: hostDB,
@@ -10,7 +10,6 @@ const pool = createPool({
   decimalNumbers: true,
 });
 
-// Sprawdzenie, czy baza danych istnieje
 pool.query('SHOW DATABASES')
 .then(([rows]) => {
     const databases = rows.map((row) => row.Database);
@@ -20,7 +19,6 @@ pool.query('SHOW DATABASES')
     }
   })
   .then(() => {
-    // Połącz się z bazą danych
     console.log(`Polaczono z baza danych o nazwie ${nameDB}`);
     return pool.query(`USE ${nameDB}`);
   })
@@ -28,52 +26,55 @@ pool.query('SHOW DATABASES')
     createAccountsTable(pool);
   })
   .then(() => {
-    // Połącz się z bazą danych
     console.log(`Polaczono z baza danych o nazwie ${nameDB}`);
     return pool.query(`USE ${nameDB}`);
   })
   .then(()=>{
     createTasksTable(pool);
   })
+  .then(() => {
+    console.log(`Polaczono z baza danych o nazwie ${nameDB}`);
+    return pool.query(`USE ${nameDB}`);
+  })
+  .then(()=>{
+    console.log('\nWczytywanie root.\n');
+    createRoot(pool);
+  })
   .catch((err) => console.error(err));
   
 
 const createAccountsTable = async (pool) => {
     try {
-      const query = `
-      CREATE TABLE IF NOT EXISTS accounts (
-        id varchar(36) NOT NULL DEFAULT UUID(),
-        username varchar(50) NOT NULL,
-        password varchar(255) NOT NULL,
-        email varchar(100) NOT NULL,
-        role varchar(20) NOT NULL DEFAULT 'user',
-        PRIMARY KEY (id)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-      `;
-      await pool.query(query);
+      await pool.query(createAccounts);
       console.log('Tabela accounts została wczytana.');
     } catch (err) {
       console.error(err);
     }
   };
 
-  const createTasksTable = async (pool) => {
+const createTasksTable = async (pool) => {
     try {
-      const query = `
-      CREATE TABLE IF NOT EXISTS tasks (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        nazwa VARCHAR(70) NOT NULL DEFAULT '',
-        tresc VARCHAR(500) NOT NULL DEFAULT '',
-        user VARCHAR(50) NOT NULL,
-        PRIMARY KEY (id)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-    `;
-      await pool.query(query);
+      await pool.query(createTasks);
       console.log('Tabela tasks została wczytana.');
     } catch (err) {
       console.error(err);
     }
+  };
+
+const createRoot = async (pool) => {
+  try {
+    const [rows] = await pool.query(findRoot);
+    if (rows.length === 0) {
+      await pool.query(insertQuery);
+      console.log('User root (pass: Admin12#) has been loaded.');
+      
+    } else {
+      console.log('The root user already exists.');
+    }
+  } catch (err) {
+    console.error(err);
   }
+};
 
 module.exports = {
   pool,
