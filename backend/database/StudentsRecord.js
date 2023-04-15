@@ -60,7 +60,6 @@ class StudentsRecord{
       }
     };
     
-
     static async updateStudent(nrIndexu, { firstName, lastName, email, year, course }) {
       try {
         const update = `UPDATE students SET firstName = ?, lastName = ?, email = ?, year = ?, course = ?
