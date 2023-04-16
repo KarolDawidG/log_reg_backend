@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
           return res.status(401).render("home", { layout: "users/wrongPass" });
         }
         
-        const payload = { user: "example" };
+        const payload = { user: user };
         const token = jwt.sign(payload, privateKey, { algorithm: "RS256" });
         res.cookie("token", token, { httpOnly: true, secure: true, sameSite: 'strict' });
         res.cookie("user", user, { httpOnly: true, secure: true, sameSite: 'strict' });
