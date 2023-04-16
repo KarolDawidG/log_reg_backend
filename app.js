@@ -16,6 +16,8 @@ const updateRole = require('./backend/routes/adminRoute/updateRole');
 const updateStudents = require('./backend/routes/diaryRoute/updateStudents');
 const aiTranslate = require('./backend/routes/featuresRoute/aiTranslate');
 const classDiary = require('./backend/routes/diaryRoute/classDiaryRoute');
+const grades = require('./backend/routes/diaryRoute/gradesRoute');
+const subjects = require('./backend/routes/diaryRoute/subjectsRoute');
 
 app.engine('.hbs', hbs.engine({
 	extname: '.hbs',
@@ -35,6 +37,8 @@ app.use('/register', regRoute );
 app.use('/todo', todoRoute );
 app.use('/form', mailRoute );
 app.use('/users', usersRoute );
+app.use('/grades', grades );
+app.use('/subjects', subjects );
 
 app.use('/update-role', updateRole );
 app.use('/update-students', updateStudents );

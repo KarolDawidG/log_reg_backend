@@ -9,7 +9,24 @@ body {
    
 }
 
+/* ================================== */
+@keyframes pulse {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0.5;
+  }
+  100% {
+      opacity: 1;
+  }
+}
 
+/* zastosowanie animacji do przycisku */
+.todo {
+  animation: pulse 1s ease-in-out infinite;
+}
+/* ================================== */
 
 .table-container {
     max-height: 200px;
@@ -22,7 +39,6 @@ body {
 }
 
 .form {
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,6 +57,7 @@ body {
   }
   
   .list {
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -65,10 +82,8 @@ body {
   }
   
   .form--delete {
+    animation: pulse 1s ease-in-out infinite;
     margin: 0;
-  }
-  
-  .form--delete {
     width: 100px;
     height: 50px;
     background-color: grey;

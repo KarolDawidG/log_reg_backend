@@ -31,7 +31,7 @@ const verifyToken = (req, res, next) => {
   jwt.verify(token, publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
     if (err) {
       console.error(err);
-      return res.status(401).json({ message: 'Token is invalid' });
+      return res.status(200).render('home', { layout: 'users/beLogin' });
     }
 
     req.user = decoded;

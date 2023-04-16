@@ -2,67 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/style.css">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt</title>
+    <link rel="stylesheet" href="/css/contact.css">
 </head>
 <body>
 
 <div class="form-container">
+  <form class="contact-form">
+    <h1 class="contact-form__title">CONTACT</h1>
 
-    <form class="contact-form">
-
-        <h1>CONTACT</h1>
-
-        <input
-                type="text"
-                id="name"
-                placeholder="nick name"
-                minlength="4"
+    <div class="contact-form__input-container">
+      <label for="name" class="contact-form__label">Nick Name</label>
+      <input    type="text" 
+                id="name" 
+                class="contact-form__input" 
+                minlength="4" 
                 maxlength="12"
+                placeholder="Adam Smith"
                 required>
-        <br>
-        <input
-                type="text"
-                id="email"
-                placeholder="e-mail"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"
+    </div>
 
+    <div class="contact-form__input-container">
+      <label for="email" class="contact-form__label">Email</label>
+      <input    type="email" 
+                id="email" 
+                class="contact-form__input"
+                placeholder="example@mail.com"
                 required>
-        <br>
-        <input
-                type="text"
-                id="subject"
-                placeholder="subject"
+    </div>
+
+    <div class="contact-form__input-container">
+      <label for="subject" class="contact-form__label">Subject</label>
+      <input    type="text" 
+                id="subject" 
+                class="contact-form__input"
+                placeholder="Great projects!!!" 
                 required>
-        <br>
-        <textarea
-                placeholder="Remember, be nice!"
-                type="message"
-                id="message"
-                cols="15"
-                rows="5"
-                required>
-                </textarea>
-        <input type="submit" class="submit" value="Send Message">
+    </div>
 
-    </form>
+    <div class="contact-form__input-container">
+      <label for="message" class="contact-form__label">Message</label>
+      <textarea         id="message" 
+                        class="contact-form__textarea" 
+                        cols="15" 
+                        rows="5" 
+                        placeholder="We invite you to cooperate!!!"
+                        required></textarea>
+    </div>
 
-    <form action="/auth" method="get">
-        <input
-                class="btn"
-                type="submit"
-                value="Go back!">
-    </form>
+    <input type="submit" class="contact-form__submit-btn" value="Send Message">
+  </form>
 
-    <form action="/logout" method="get">
-        <input
-                class="btn"
-                type="submit"
-                value="Logout">
-    </form>
+  <form action="/auth" method="get">
+    <input type="submit" class="form-container__btn" value="Go back!">
+  </form>
 
+  <form action="/logout" method="get">
+    <input type="submit" class="form-container__btn" value="Logout">
+  </form>
 </div>
 
 <script src="/js/emailSender.js"></script>
