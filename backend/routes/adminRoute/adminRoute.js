@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const middleware = require('../config/middleware')
+const middleware = require('../../config/middleware')
 router.use(middleware);
 
 router.get('/', (req, res, next) => {
-        res.clearCookie('user');
-        res.clearCookie('token');
-        res.status(200).redirect('/');
+        res.status(200).render("home", { layout: "users/admin" });
     });
 
 module.exports = router;

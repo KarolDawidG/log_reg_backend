@@ -1,6 +1,6 @@
 const express = require('express');
-const {pool} = require('../database/db')
-const middleware = require("../config/middleware");
+const {pool} = require('../../database/db')
+const middleware = require("../../config/middleware");
 const router = express.Router();
 router.use(middleware);
 

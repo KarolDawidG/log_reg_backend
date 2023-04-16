@@ -1,7 +1,7 @@
 const express = require('express');
-const { API_KEY } = require('../config/configENV');
+const { API_KEY } = require('../../config/configENV');
 const router = express.Router();
-const middleware = require('../config/middleware');
+const middleware = require('../../config/middleware');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 router.use(middleware);

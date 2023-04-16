@@ -1,10 +1,10 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { UsersRecord } = require("../database/UsersRecord");
+const { UsersRecord } = require("../../database/UsersRecord");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-const middleware = require('../config/middleware')
-const { verifyToken, publicKey, privateKey, queryParameterize } = require('../config/config');
+const middleware = require('../../config/middleware')
+const { verifyToken, publicKey, privateKey, queryParameterize } = require('../../config/config');
 router.use(middleware);
 
 router.get('/', verifyToken, (req, res) => {

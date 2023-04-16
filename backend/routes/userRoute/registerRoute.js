@@ -1,9 +1,9 @@
 const express = require('express');
-const {UsersRecord} = require("../database/UsersRecord");
+const {UsersRecord} = require("../../database/UsersRecord");
 const bcrypt = require("bcrypt");
-const middleware = require("../config/middleware");
+const middleware = require("../../config/middleware");
 const router = express.Router();
-const { queryParameterize } = require('../config/config');
+const { queryParameterize } = require('../../config/config');
 
 router.use(middleware);
 

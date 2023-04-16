@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const middleware = require('../config/middleware')
-const {TaskRecord} = require("../database/TaskRecord");
+const middleware = require('../../config/middleware')
+const {TaskRecord} = require("../../database/TaskRecord");
 router.use(middleware);
 
 

@@ -1,7 +1,7 @@
 const express = require('express');
-const {StudentsRecord} = require("../database/StudentsRecord");
+const {StudentsRecord} = require("../../database/StudentsRecord");
 const router = express.Router();
-const middleware = require('../config/middleware')
+const middleware = require('../../config/middleware')
 
 router.use(middleware);
 

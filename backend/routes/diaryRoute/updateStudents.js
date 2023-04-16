@@ -1,7 +1,7 @@
 const express = require('express');
-const {pool} = require('../database/db')
-const {StudentsRecord} = require("../database/StudentsRecord");
-const middleware = require("../config/middleware");
+const {pool} = require('../../database/db')
+const {StudentsRecord} = require("../../database/StudentsRecord");
+const middleware = require("../../config/middleware");
 const router = express.Router();
 router.use(middleware);
 

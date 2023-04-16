@@ -1,8 +1,8 @@
 const nodemailer = require("nodemailer");
 const express = require('express');
 const router = express.Router();
-const middleware = require('../config/middleware')
-const {user, pass, service} = require("../config/configENV");
+const middleware = require('../../config/middleware')
+const {user, pass, service} = require("../../config/configENV");
 router.use(middleware);
 
 router.get('/', (req, res)=>{

@@ -5,17 +5,17 @@ const {limiter} = require('./backend/config/config');
 const middleware = require("./backend/config/middleware");
 const app = express();
 
-const logRoute = require('./backend/routes/loginRoute');
-const adminRoute = require('./backend/routes/adminRoute');
-const regRoute = require('./backend/routes/registerRoute');
-const mailRoute = require('./backend/routes/mailRoute');
-const logoutRoute = require('./backend/routes/logoutRoute');
-const todoRoute = require('./backend/routes/todoRoute');
-const usersRoute = require('./backend/routes/usersRoute');
-const updateRole = require('./backend/routes/updateRole');
-const updateStudents = require('./backend/routes/updateStudents');
-const aiTranslate = require('./backend/routes/aiTranslate');
-const classDiary = require('./backend/routes/classDiaryRoute');
+const logRoute = require('./backend/routes/userRoute/loginRoute');
+const adminRoute = require('./backend/routes/adminRoute/adminRoute');
+const regRoute = require('./backend/routes/userRoute/registerRoute');
+const mailRoute = require('./backend/routes/featuresRoute/mailRoute');
+const logoutRoute = require('./backend/routes/userRoute/logoutRoute');
+const todoRoute = require('./backend/routes/featuresRoute/todoRoute');
+const usersRoute = require('./backend/routes/adminRoute/usersRoute');
+const updateRole = require('./backend/routes/adminRoute/updateRole');
+const updateStudents = require('./backend/routes/diaryRoute/updateStudents');
+const aiTranslate = require('./backend/routes/featuresRoute/aiTranslate');
+const classDiary = require('./backend/routes/diaryRoute/classDiaryRoute');
 
 app.engine('.hbs', hbs.engine({
 	extname: '.hbs',
