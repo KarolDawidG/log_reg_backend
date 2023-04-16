@@ -31,7 +31,8 @@ const verifyToken = (req, res, next) => {
   jwt.verify(token, publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
     if (err) {
       console.error(err);
-      return res.status(200).render('home', { layout: 'users/beLogin' });
+      console.log('JsonWebTokenError: invalid signature.')
+      return res.status(401).render('home', { layout: 'users/expiredSession' });
     }
 
     req.user = decoded;
