@@ -1,7 +1,7 @@
 const { createPool } = require('mysql2/promise');
 const { hostDB, userDB, passDB, nameDB } = require('../config/configENV');
 const {insertQuery, findRoot, createTasks, createAccounts, createStudents, createSubjects,
-  createGrades} = require('./querrys')
+  createGrades, student_grades_subjects} = require('./querrys')
 
 const pool = createPool({
   host: hostDB,
@@ -19,7 +19,7 @@ const pool = createPool({
         await pool.query(`CREATE DATABASE ${nameDB}`);
       }
         await pool.query(`USE ${nameDB}`);
-          const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable];
+          const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable, createStudentGradesSubjects];
       for await (const table of tables) {
         await table(pool);
       }
@@ -48,6 +48,14 @@ const createTasksTable = async (pool) => {
   const createSubjectsTable = async (pool) => {
     try {
       await pool.query(createSubjects);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const createStudentGradesSubjects = async (pool) => {
+    try {
+      await pool.query(student_grades_subjects);
     } catch (err) {
       console.error(err);
     }

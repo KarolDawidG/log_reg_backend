@@ -46,16 +46,29 @@ const createTasks = `
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   `;
 
-  const createGrades   = `
+  const createGrades = `
   CREATE TABLE IF NOT EXISTS grades (
     id INT(11) NOT NULL AUTO_INCREMENT,
     student_id INT(6) NOT NULL,
+    student_last_name VARCHAR(24) NOT NULL,
     subject_id INT(11) NOT NULL,
     grade INT(3) NOT NULL,
     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     description VARCHAR(200) DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (student_id) REFERENCES students(nrIndexu) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+`;
+
+
+  const student_grades_subjects   = `
+  CREATE TABLE IF NOT EXISTS student_grades_subjects (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    student_last_name VARCHAR(24) NOT NULL,
+    grade INT(3) NOT NULL,
+    subject_id INT(11) NOT NULL,
+    PRIMARY KEY (id),
     FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   `;
@@ -69,4 +82,5 @@ module.exports = {
     createStudents,
     createSubjects,
     createGrades,
+    student_grades_subjects,
 }
