@@ -46,7 +46,7 @@ app.use(limiter);
 app.use(middleware);
 
 app.get('/', (req, res) => {
-	res.status(200).render('home', {layout : 'login'});
+	res.status(200).render('home', {layout : 'users/login'});
 });
 
 app.listen(PORT, ()=>{console.log(`Server Started correctly on port ${PORT}`)});

@@ -8,7 +8,7 @@ router.use(middleware);
 router.get('/', async (req, res, next) => {
     try {
         const tasks = await TaskRecord.listAll(req.cookies["user"]);
-        res.status(200).render('layouts/main', {tasks});
+        res.status(200).render("home", { layout: "features/main", tasks });
     } catch (error) {
         console.error(error);
         res.status(500).send('Unknown server error. Please contact your administrator.');

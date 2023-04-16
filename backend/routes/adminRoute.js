@@ -4,7 +4,7 @@ const middleware = require('../config/middleware')
 router.use(middleware);
 
 router.get('/', (req, res, next) => {
-        res.status(200).render("home", { layout: "admin" });
+        res.status(200).render("home", { layout: "users/admin" });
     });
 
 module.exports = router;

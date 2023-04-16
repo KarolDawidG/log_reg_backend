@@ -6,7 +6,7 @@ const {user, pass, service} = require("../config/configENV");
 router.use(middleware);
 
 router.get('/', (req, res)=>{
-    res.status(200).render('home', {layout : 'contact'});
+    res.status(200).render('home', {layout : 'features/contact'});
 });
 
 router.post('/', async (req, res)=>{

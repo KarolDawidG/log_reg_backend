@@ -25,7 +25,7 @@ const verifyToken = (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(200).render('home', { layout: 'beLogin' });
+    return res.status(200).render('home', { layout: 'users/beLogin' });
   }
 
   jwt.verify(token, publicKey, { algorithms: ['RS256'] }, (err, decoded) => {

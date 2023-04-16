@@ -1,175 +1,125 @@
 * {
-    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 16px;
+    
 }
 
 body {
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    background-size: 200% 200%;
     animation: gradient 10s ease infinite;
+   
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
-h1, h2 {
+
+.table-container {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  
+.page__heading, .page__subheading {
     text-align: center;
-    font-size: 48px;
-    font-weight: bold;
-    background: linear-gradient(to right, #8A2387, #E94057, #F27121);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbow 2s linear infinite;
+    margin-top: 5px;
 }
 
-@keyframes rainbow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-
- h2 {
-    text-align: center;
-    color: #fff;
-    font-size: 24px;
-    padding: 20px 0 20px 0;
-    border-bottom: 1px solid #dee0e4;
-}
-
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #34495e;
-    border: none;
-    border-radius: 5px;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #fff;
-}
-
-input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #2c3e50;
-    color: #fff;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-/* definicja animacji */
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* zastosowanie animacji do przycisku */
-.todo {
-    animation: pulse 1s ease-in-out infinite;
-}
-
-
-button[type="submit"], .btn {
-    background-color: #1E90FF;
-    color: #fff;
-    border: none;
-    width: 100%;
-    padding: 15px;
-    border-radius: 5px;
-    margin: 1px 0;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-button[type="submit"]:hover, .btn:hover {
-    background-color: #fff;
-    color: #1E90FF;
-    border: 1px solid #1E90FF;
-}
-
-.container {
+.form {
+    
     display: flex;
+    flex-direction: column;
     justify-content: center;
-  }
-  
-  .btnlogout {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #1e90ff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s ease;
-  }
-  
-  .btnlogout:hover {
-    background-color: #fff;
-    color: #1e90ff;
+    align-items: center;
+    background-color: #f5f5f5;
+    width: 40%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
   }
 
-ul {
-    width: 50%;
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .list {
     display: flex;
     justify-content: space-between;
-
-    padding: 1% 1%;
-    border-radius: 15px;
-    margin: 20px auto;
-    background-color: #34495e;
-}
-
-li {
-    line-height: 3.5;
-    text-align: center;
-    border: 1px solid #fff;
-    color: #fff;
-    width: calc(50% - 20px);
-    padding: 1% 1%;
-    border-radius: 15px;
-    margin: 20px 10px;
-    transition: background-color 0.2s;
-    background-color: #2c3e50;
-}
-
-li:hover {
-    background-color: #1abc9c;
-    border-color: #16a085;
-}
+    align-items: center;
+    background-color: #fff;
+    margin-bottom: 5px;
+    padding: 5px;
+    width: 60%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .list:hover {
+    background-color: grey;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+  }
+  
+  .list__item {
+    flex-grow: 1;
+    margin: 5px;
+    padding: 5px;
+  }
+  
+  .form--delete {
+    margin: 0;
+  }
+  
+  .form--delete {
+    width: 100px;
+    height: 50px;
+    background-color: grey;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .form--delete:hover {
+    background-color: darkolivegreen;
+  }
+  
+  .form--delete:active {
+    background-color: red;
+  }
+  
+  .form__button--go-back, .form__button--logout {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .form__button--go-back:hover {
+    transform: translateX(-10px);
+  }
+  
+  .form__button--logout:hover {
+    transform: translateX(10px);
+  }
+  
+  input[type=text], input[type=password], select {
+    width: 40%;
+    padding: 12px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }

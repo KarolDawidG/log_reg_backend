@@ -1,4 +1,13 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  
+}
 
+body {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  animation: gradient 10s ease infinite;
+ 
+}
 .table-container {
   max-height: 250px;
   overflow-y: scroll;

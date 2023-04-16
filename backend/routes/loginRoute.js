@@ -13,13 +13,13 @@ router.get('/', verifyToken, (req, res) => {
         jwt.verify(token, publicKey, { algorithms: ['RS256'] }, (err, decoded) => {
             if (err) {
                 console.error(err);
-                res.status(401).render('home', { layout: 'login' });
+                res.status(401).render('home', { layout: 'users/login' });
             } else {
                 res.status(200).render('home', { layout: 'home' });
             }
         });
     } else {
-        res.status(200).render('home', { layout: 'login' });
+        res.status(200).render('home', { layout: 'users/login' });
     }
 });
 
@@ -34,13 +34,13 @@ router.post("/", async (req, res) => {
       const ifUser = await UsersRecord.selectByUsername([user]);
       if (user.match(queryParameterize)) {
         if (ifUser.length === 0) {
-          return res.status(401).render("home", { layout: "wrongUser" });
+          return res.status(401).render("home", { layout: "users/wrongUser" });
         }
 
         const hashedPassword = ifUser[0].password;
         const result = await bcrypt.compare(password, hashedPassword);
         if (!result) {
-          return res.status(401).render("home", { layout: "wrongPass" });
+          return res.status(401).render("home", { layout: "users/wrongPass" });
         }
         
         const payload = { user: "example" };

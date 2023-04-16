@@ -9,7 +9,7 @@ router.use(middleware);
 
 router.get('/', async (req, res)=>{
     try{
-        res.status(200).render('home', {layout : 'register'});
+        res.status(200).render('home', {layout : 'users/register'});
     } catch (err) {
         console.error(err);
         res.status(500).send('Unknown server error. Please contact your administrator.');
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
                 loginExists: await UsersRecord.selectByUsername([username])
             }
             if (userExists.emailExists && userExists.emailExists.length > 0 || userExists.loginExists && userExists.loginExists.length > 0 ) {
-                return res.status(401).render('home', {layout : 'repeatedUserEmail'});
+                return res.status(401).render('home', {layout : 'users/repeatedUserEmail'});
             }
             const hashPassword = await bcrypt.hash(password, 10);
             await UsersRecord.insert([username, hashPassword, email]);

@@ -8,7 +8,7 @@ router.use(middleware);
 router.get('/', async (req, res, next) => {
    try {
       const usersList = await UsersRecord.listAll();
-      res.status(200).render('home', {layout : 'users', usersList});
+      res.status(200).render('home', {layout : 'features/users', usersList});
    } catch (error) {
       console.error(error);
       res.status(500).send('Something went wrong');

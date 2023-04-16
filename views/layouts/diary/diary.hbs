@@ -9,23 +9,17 @@
 <body>
     <div class="forms-container">
     <div class="forms-container__create">
-        <h2 class="forms-container__title">Information about student</h2>
-        
           <form class="form" action="/auth" method="get">
           <input class="form__btn" type="submit" value="Oceny">
+          </form>
 
           <form class="form" action="/auth" method="get">
           <input class="form__btn" type="submit" value="Przedmioty">
-
-          <form class="form" action="/auth" method="get">
-          <input class="form__btn" type="submit" value="Go back!">
-
-          <form class="form" action="/logout" method="get">
-          <input class="form__btn" type="submit" value="Logout">
+          </form>
           
-    </form>
-    </form>
+        <h2 class="forms-container__title">Information about student</h2>
         <form class="forms-container__form" action="/classDiary" method="post">
+    
             <input class="forms-container__input" type="text" name="firstName" placeholder="First name" required>
             <br>
             <input class="forms-container__input" type="text" name="lastName" placeholder="Last name" required>
@@ -41,6 +35,13 @@
     </div>
     
     <div class="forms-container__edit">
+            <form class="form" action="/auth" method="get">
+            <input class="form__btn" type="submit" value="Go back!">
+            </form>
+
+            <form class="form" action="/logout" method="get">
+            <input class="form__btn" type="submit" value="Logoutt">
+            </form>
         <h2 class="forms-container__title">Edit student</h2>
         <form class="forms-container__form" action="/update-students" method="post">
             <input class="forms-container__input" type="text" name="firstName" placeholder="First name" required>

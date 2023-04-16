@@ -8,7 +8,7 @@ router.use(middleware);
 
 router.get('/', async (req, res, next) => {
     try {
-        res.status(200).render("home", { layout: "appTranslation" });
+        res.status(200).render("home", { layout: "features/appTranslation" });
     } catch (error) {
         console.error(error)
     }

@@ -1,0 +1,60 @@
+<!doctype html>
+<head>
+    <link class="page__link" rel="stylesheet" href="/css/todo.css">
+    <title class="page__title">To DO List</title>
+
+</head>
+    <body class="page__body">
+        <h2 class="page__subheading">To DO List</h2>
+
+            <form class="form" action="/todo" method="post">
+
+                <label class="form__label" for="nazwa">Nazwa zadania:</label>
+                <input class="form__input"
+                    type="text"
+                    name="nazwa"
+                    placeholder="tytul"
+                    required
+                    minlength="5"
+                    maxlength="10"><br>
+
+                <label class="form__label" for="tresc">Treść zadania:</label>
+                <textarea class="form__textarea"
+                        name="tresc"
+                        placeholder="tresc"
+                        minlength="5"
+                        maxlength="100"
+                        required></textarea><br>
+                <button class="form__button" type="submit">Dodaj</button>
+            </form><br>
+
+           <div class="table-container">
+            {{#each tasks}}
+                <div class="list">
+                <ul class="list__item">Zadanie: {{this.nazwa}}</ul>
+                <ul class="list__item">Treść: {{this.tresc}}</ul>
+
+                <form class="form form--delete" action="/todo/delete/{{this.id}}" method="post">
+                    <input class="form__button form__button--delete" type="submit" value="Delete">
+                </form>
+                </div>
+            {{/each}}
+            </div>
+
+
+        <form class="form form--go-back" action="/auth" method="get">
+            <input
+                    class="form__button form__button--go-back"
+                    type="submit"
+                    value="Go back!">
+        </form>
+        
+        <form class="form form--logout" action="/logout" method="get">
+            <input
+                class="form__button form__button--logout"
+                type="submit"
+                value="Logout">
+        </form>
+        
+    </body>
+</html>
