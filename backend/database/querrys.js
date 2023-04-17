@@ -73,6 +73,17 @@ const createTasks = `
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   `;
 
+  const trigged = `
+  CREATE TRIGGER IF NOT EXISTS update_student_grades_subjects
+AFTER INSERT ON grades
+FOR EACH ROW
+BEGIN
+    INSERT INTO student_grades_subjects (student_last_name, grade, subject_id)
+    VALUES (NEW.student_last_name, NEW.grade, NEW.subject_id)
+    ON DUPLICATE KEY UPDATE grade = NEW.grade;
+END;
+`;
+
 
 module.exports = {
     insertQuery,
@@ -83,4 +94,6 @@ module.exports = {
     createSubjects,
     createGrades,
     student_grades_subjects,
+    trigged,
+    
 }

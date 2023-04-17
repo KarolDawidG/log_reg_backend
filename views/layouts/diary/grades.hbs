@@ -43,7 +43,29 @@
 </div>
 
 
-
+<h2>Second tables</h2>
+<div class="table-container">
+        <table class="table">
+            <thead class="table__head">
+                <tr class="table__row">
+                    <th class="table__heading">Lp</th>
+                    <th class="table__heading">Student last name</th>
+                    <th class="table__heading">grade</th>
+                    <th class="table__heading">sub id</th>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+                {{#each gradesFromAll}}
+                <tr class="table__row">
+                    <td class="table__cell">{{id}}</td>
+                    <td class="table__cell">{{student_last_name}}</td>
+                    <td class="table__cell">{{grade}}</td>
+                    <td class="table__cell">{{subject_id}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+    </table>
+</div>
 
 
 

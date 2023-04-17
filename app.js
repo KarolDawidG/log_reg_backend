@@ -29,22 +29,19 @@ app.engine('.hbs', hbs.engine({
   }));
 
 app.set('view engine', '.hbs');
-
+app.use('/register', regRoute );
 app.use('/auth', logRoute );
 app.use('/admin', adminRoute );
 app.use('/logout', logoutRoute);
-app.use('/register', regRoute );
-app.use('/todo', todoRoute );
-app.use('/form', mailRoute );
 app.use('/users', usersRoute );
-app.use('/grades', grades );
-app.use('/subjects', subjects );
-
 app.use('/update-role', updateRole );
 app.use('/update-students', updateStudents );
-
+app.use('/todo', todoRoute );
+app.use('/form', mailRoute );
 app.use('/translate', aiTranslate );
 app.use('/classDiary', classDiary );
+app.use('/subjects', subjects );
+app.use('/grades', grades );
 
 app.use(limiter);
 app.use(middleware);
