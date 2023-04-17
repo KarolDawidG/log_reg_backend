@@ -73,14 +73,25 @@ const createTasks = `
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   `;
 
-  const trigged = `
-  CREATE TRIGGER IF NOT EXISTS update_student_grades_subjects
+  const insert_student_grades_subjects = `
+  CREATE TRIGGER IF NOT EXISTS insert_student_grades_subjects
 AFTER INSERT ON grades
 FOR EACH ROW
 BEGIN
     INSERT INTO student_grades_subjects (student_last_name, grade, subject_id)
     VALUES (NEW.student_last_name, NEW.grade, NEW.subject_id)
     ON DUPLICATE KEY UPDATE grade = NEW.grade;
+END;
+`;
+
+const delete_student_grades_subjects = `
+CREATE TRIGGER IF NOT EXISTS delete_student_grades_subjects
+AFTER DELETE ON grades
+FOR EACH ROW
+BEGIN
+  DELETE FROM student_grades_subjects
+  WHERE subject_id = OLD.subject_id
+  AND student_last_name = OLD.student_last_name;
 END;
 `;
 
@@ -94,6 +105,7 @@ module.exports = {
     createSubjects,
     createGrades,
     student_grades_subjects,
-    trigged,
+    insert_student_grades_subjects,
+    delete_student_grades_subjects,
     
 }

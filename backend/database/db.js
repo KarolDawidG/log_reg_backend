@@ -1,7 +1,7 @@
 const { createPool } = require('mysql2/promise');
 const { hostDB, userDB, passDB, nameDB } = require('../config/configENV');
 const {insertQuery, findRoot, createTasks, createAccounts, createStudents, createSubjects,
-  createGrades, student_grades_subjects, trigged} = require('./querrys')
+  createGrades, student_grades_subjects, insert_student_grades_subjects, delete_student_grades_subjects} = require('./querrys');
 
 const pool = createPool({
   host: hostDB,
@@ -19,7 +19,7 @@ const pool = createPool({
         await pool.query(`CREATE DATABASE ${nameDB}`);
       }
         await pool.query(`USE ${nameDB}`);
-          const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable, createStudentGradesSubjects, createTrigger];
+        const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable, createStudentGradesSubjects, createTriggedStudGradSub, deleteTriggedStudGradSub];
       for await (const table of tables) {
         await table(pool);
       }
@@ -91,11 +91,17 @@ const createRoot = async (pool) => {
   }
 };
 
-const createTrigger = async (pool) => {
+const createTriggedStudGradSub = async (pool) => {
   try {
-    
-    await pool.query(trigged);
-    console.log('Trigger created.');
+    await pool.query(insert_student_grades_subjects);
+  } catch (err) {
+    console.error(err);
+  } 
+};
+
+const deleteTriggedStudGradSub = async (pool) => {
+  try {
+    await pool.query(delete_student_grades_subjects);
   } catch (err) {
     console.error(err);
   } 
