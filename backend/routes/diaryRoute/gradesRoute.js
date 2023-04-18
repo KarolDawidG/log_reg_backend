@@ -1,6 +1,6 @@
 const express = require('express');
-const {GradesRecord} = require("../../database/GradesRecord");
-const {AllGrades} = require("../../database/AllGrades");
+const {GradesRecord} = require("../../database/Records/GradesRecord");
+const {AllGrades} = require("../../database/Records/AllGrades");
 const router = express.Router();
 const middleware = require('../../config/middleware')
 router.use(middleware);

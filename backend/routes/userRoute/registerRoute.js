@@ -1,5 +1,5 @@
 const express = require('express');
-const {UsersRecord} = require("../../database/UsersRecord");
+const {UsersRecord} = require("../../database/Records/UsersRecord");
 const bcrypt = require("bcrypt");
 const middleware = require("../../config/middleware");
 const router = express.Router();

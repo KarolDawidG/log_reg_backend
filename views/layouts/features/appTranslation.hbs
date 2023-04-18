@@ -7,14 +7,16 @@
   </head>
   <body>
     <h1>Tekst do przetłumaczenia:</h1>
-    <button id="go_back" class="btn">Go back!</button>
+        <form action="/auth" method="get">
+          <input type="submit" class="btn_back" value="Go back!">
+        </form>
     <form class="translate" action="/translate" method="POST">
         <input 
             type="text"
             name="inputText"
             id="inputText"
         />
-        <input class="translate" type="submit" value="Przetłumacz">
+        <input class="btn_translate"  type="submit" value="Przetłumacz">
     </form>
 
     <div id="output"></div>

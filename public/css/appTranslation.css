@@ -61,7 +61,7 @@ input[type="text"] {
 }
 
 /* Ostylowanie przycisku */
-input[type="submit"] {
+.btn_translate {
   animation: pulse 1s ease-in-out infinite;
   padding: 10px 20px;
   background-color: #007bff;
@@ -73,11 +73,11 @@ input[type="submit"] {
   transition: all 0.3s ease;
 }
 
-input[type="submit"]:hover {
+.btn_translate:hover {
   background-color: lightskyblue;
 }
 
-.btn_clear{
+.btn_clear, .btn_back{
   display: block; 
   margin: 0 auto; 
   text-align: center;
@@ -91,6 +91,11 @@ input[type="submit"]:hover {
   transition: all 0.3s ease;
 }
 .btn_clear:hover{
+  background-color: #fff;
+    color: #1e90ff;
+}
+
+.btn_back:hover{
   background-color: #fff;
     color: #1e90ff;
 }

@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { UsersRecord } = require("../../database/UsersRecord");
+const { UsersRecord } = require("../../database/Records/UsersRecord");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const middleware = require('../../config/middleware')

@@ -1,5 +1,5 @@
 const express = require('express');
-const {SubjectsRecord} = require("../../database/SubjectsRecord");
+const {SubjectsRecord} = require("../../database/Records/SubjectsRecord");
 const router = express.Router();
 const middleware = require('../../config/middleware')
 router.use(middleware);

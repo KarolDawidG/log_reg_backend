@@ -1,5 +1,5 @@
 const express = require('express');
-const {StudentsRecord} = require("../../database/StudentsRecord");
+const {StudentsRecord} = require("../../database/Records/StudentsRecord");
 const router = express.Router();
 const middleware = require('../../config/middleware')
 
