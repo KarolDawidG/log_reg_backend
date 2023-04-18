@@ -1,5 +1,5 @@
 
-const insertQuery = `INSERT INTO accounts (id, username, password, email, role) VALUES (UUID(), 'root', '$2b$10$8Lbg6tvI4e/mOyku3uvNNONfatfeTGHI/D531boVUqWIe3kTOKK/K', 'root@gmail.com', 'admin');`;
+const insertRoot = `INSERT INTO accounts (id, username, password, email, role) VALUES (UUID(), 'root', '$2b$10$8Lbg6tvI4e/mOyku3uvNNONfatfeTGHI/D531boVUqWIe3kTOKK/K', 'root@gmail.com', 'admin');`;
 
 const findRoot = `SELECT id FROM accounts WHERE username = 'root'`;
 
@@ -95,9 +95,8 @@ BEGIN
 END;
 `;
 
-
 module.exports = {
-    insertQuery,
+    insertRoot,
     findRoot,
     createTasks,
     createAccounts,

@@ -1,10 +1,12 @@
 const express = require('express');
+const path = require('path');
 const hbs = require('express-handlebars');
 const {PORT} = require('./backend/config/configENV');
 const {limiter} = require('./backend/config/config');
 const middleware = require("./backend/config/middleware");
 const app = express();
 
+app.set('views', path.join(__dirname, 'frontend/views'));
 const logRoute = require('./backend/routes/userRoute/loginRoute');
 const adminRoute = require('./backend/routes/adminRoute/adminRoute');
 const regRoute = require('./backend/routes/userRoute/registerRoute');

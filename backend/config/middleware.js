@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 
 const middleware = express.Router();
 
-middleware.use(express.static('public'));
+middleware.use(express.static('frontend/public'));
 middleware.use(cookieParser());
 middleware.use(express.json());
 middleware.use(express.urlencoded({ extended: true }));
