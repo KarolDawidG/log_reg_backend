@@ -6,7 +6,6 @@ const {limiter} = require('./backend/config/config');
 const middleware = require("./backend/config/middleware");
 const app = express();
 
-app.set('views', path.join(__dirname, 'frontend/views'));
 const logRoute = require('./backend/routes/userRoute/loginRoute');
 const adminRoute = require('./backend/routes/adminRoute/adminRoute');
 const regRoute = require('./backend/routes/userRoute/registerRoute');
@@ -21,6 +20,7 @@ const classDiary = require('./backend/routes/diaryRoute/classDiaryRoute');
 const grades = require('./backend/routes/diaryRoute/gradesRoute');
 const subjects = require('./backend/routes/diaryRoute/subjectsRoute');
 
+app.set('views', path.join(__dirname, 'frontend/views'));
 app.engine('.hbs', hbs.engine({
 	extname: '.hbs',
 	helpers: {

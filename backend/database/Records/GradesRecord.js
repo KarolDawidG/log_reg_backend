@@ -19,6 +19,17 @@ class GradesRecord{
           throw error;
         }
     };
+
+    static async selectBySubject(){
+      try{
+        const [results] = await pool.execute(`SELECT * FROM grades WHERE subject_id = ?`, [subject_id]);
+        
+      return results.map(obj => new GradesRecord(obj));
+      } catch (error) {
+        console.error('Error selecting grades:', error);
+        throw error;
+      }
+  };
  
     static async delete(id) {
       try {
