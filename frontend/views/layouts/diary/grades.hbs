@@ -7,67 +7,55 @@
 </head>
 <body>
 
-    <form class="form" action="/classDiary" method="get">
-        <input class="form__btn" type="submit" value="Go back!">
+    <form class="form" action="/update-grade" method="get">
+        <input class="form__btn" type="submit" value="Add grades!">
     </form>
 
-    <form class="form" action="/logout" method="get">
-        <input class="form__btn" type="submit" value="Logoutt">
-    </form>
+
+<h2>Gupie oceny</h2>
+    <div class="filter-container">
+       <form action="/grades" method="get">
+    <select class="forms-container__select" name="student_id" id="student_id"> 
+        {{#each subjects}}
+            <option value="{{this.student_id}}">{{this.student_id}}</option>
+        {{/each}}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+    </div>
+
 
     <div class="table-container">
         <table class="table">
             <thead class="table__head">
                 <tr class="table__row">
                     <th class="table__heading">Lp</th>
-                    <th class="table__heading">student_id</th>
+                    <th class="table__heading">Last name</th>
                     <th class="table__heading">subject_id</th>
                     <th class="table__heading">grade</th>
-                    <th class="table__heading">timestamp</th>
-                    <th class="table__heading">description</th>
                 </tr>
             </thead>
             <tbody class="table__body">
-                {{#each grades}}
+                {{#each results}}
                 <tr class="table__row">
                     <td class="table__cell">{{inc @index}}</td>
-                    <td class="table__cell">{{student_id}}</td>
-                    <td class="table__cell">{{subject_id}}</td>
-                    <td class="table__cell">{{grade}}</td>
-                    <td class="table__cell">{{timestamp}}</td>
-                    <td class="table__cell">{{description}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-    </table>
-</div>
-
-
-<h2>Second tables</h2>
-<div class="table-container">
-        <table class="table">
-            <thead class="table__head">
-                <tr class="table__row">
-                    <th class="table__heading">Lp</th>
-                    <th class="table__heading">Student last name</th>
-                    <th class="table__heading">grade</th>
-                    <th class="table__heading">sub id</th>
-                </tr>
-            </thead>
-            <tbody class="table__body">
-                {{#each gradesFromAll}}
-                <tr class="table__row">
-                    <td class="table__cell">{{id}}</td>
                     <td class="table__cell">{{student_last_name}}</td>
-                    <td class="table__cell">{{grade}}</td>
                     <td class="table__cell">{{subject_id}}</td>
+                    <td class="table__cell">{{grade}}</td>
                 </tr>
                 {{/each}}
             </tbody>
-    </table>
-</div>
+        </table>
+    </div>
+
+    <form class="form" action="/classDiary" method="get">
+        <input class="form__btn" type="submit" value="Go back!">
+    </form>
 
 
+    <form class="form" action="/logout" method="get">
+        <input class="form__btn" type="submit" value="Logoutt">
+    </form>
 
-    </body>
+</body>
 </html>

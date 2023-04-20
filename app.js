@@ -17,8 +17,9 @@ const updateRole = require('./backend/routes/adminRoute/updateRole');
 const updateStudents = require('./backend/routes/diaryRoute/updateStudents');
 const aiTranslate = require('./backend/routes/featuresRoute/aiTranslate');
 const classDiary = require('./backend/routes/diaryRoute/classDiaryRoute');
-const grades = require('./backend/routes/diaryRoute/gradesRoute');
 const subjects = require('./backend/routes/diaryRoute/subjectsRoute');
+const grades = require('./backend/routes/diaryRoute/gradesRoute');
+const updateGrades = require('./backend/routes/diaryRoute/updateGradesRoute');
 
 app.set('views', path.join(__dirname, 'frontend/views'));
 app.engine('.hbs', hbs.engine({
@@ -44,6 +45,7 @@ app.use('/translate', aiTranslate );
 app.use('/classDiary', classDiary );
 app.use('/subjects', subjects );
 app.use('/grades', grades );
+app.use('/update-grade', updateGrades);
 
 app.use(limiter);
 app.use(middleware);

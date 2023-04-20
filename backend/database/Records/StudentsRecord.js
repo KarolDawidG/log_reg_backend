@@ -21,6 +21,16 @@ class StudentsRecord{
         }
     };
 
+    static async selectBynrIndexu(nrIndexu){
+      try{
+        const [results] = await pool.execute('SELECT * FROM students WHERE nrIndexu = ?', nrIndexu);
+        return results;
+      } catch (error) {
+        console.error('Error selecting student by nrIndexu:', error);
+        throw error;
+      }
+    };
+
     static async selectByCourse(course){
       try{
         const [results] = await pool.execute('SELECT * FROM students WHERE students = ?', course);
@@ -67,6 +77,27 @@ class StudentsRecord{
         await pool.execute(update, [firstName, lastName, email, year, course, nrIndexu]);
       } catch (error) {
         console.error('Error updating student:', error);
+        throw error;
+      }
+    };
+    
+
+    static async getAllNrIndexes() {
+      try {
+        const [results] = await pool.execute('SELECT nrIndexu FROM students');
+        return results.map(obj => obj.nrIndexu);
+      } catch (error) {
+        console.error('Error selecting nrIndexes:', error);
+        throw error;
+      }
+    };
+
+    static async getAllastName() {
+      try {
+        const [results] = await pool.execute('SELECT lastName FROM students');
+        return results.map(obj => obj.lastName);
+      } catch (error) {
+        console.error('Error selecting nrIndexes:', error);
         throw error;
       }
     };

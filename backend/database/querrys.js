@@ -24,17 +24,7 @@ const createTasks = `
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
     `;
 
-    const createStudents = `
-    CREATE TABLE IF NOT EXISTS students (
-      nrIndexu INT(6) NOT NULL AUTO_INCREMENT,
-      firstName VARCHAR(16) NOT NULL DEFAULT '',
-      lastName VARCHAR(24) NOT NULL DEFAULT '',
-      email VARCHAR(24) NOT NULL DEFAULT '',
-      year INT(4) NOT NULL,
-      course VARCHAR(16) NOT NULL DEFAULT '',
-      PRIMARY KEY (nrIndexu)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-  `;
+   
 
   const createSubjects  = `
   CREATE TABLE IF NOT EXISTS subjects (
@@ -45,6 +35,18 @@ const createTasks = `
     PRIMARY KEY (id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   `;
+
+  const createStudents = `
+  CREATE TABLE IF NOT EXISTS students (
+    nrIndexu INT(6) NOT NULL AUTO_INCREMENT,
+    firstName VARCHAR(16) NOT NULL DEFAULT '',
+    lastName VARCHAR(24) NOT NULL DEFAULT '',
+    email VARCHAR(24) NOT NULL DEFAULT '',
+    year INT(4) NOT NULL,
+    course VARCHAR(16) NOT NULL DEFAULT '',
+    PRIMARY KEY (nrIndexu)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+`;
 
   const createGrades = `
   CREATE TABLE IF NOT EXISTS grades (

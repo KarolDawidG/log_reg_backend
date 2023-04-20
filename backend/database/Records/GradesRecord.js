@@ -8,6 +8,7 @@ class GradesRecord{
         this.grade = obj.grade;
         this.timestamp = obj.timestamp;
         this.description = obj.description;
+        this.student_last_name = obj.student_last_name;
       }
 
     static async listAll(){
@@ -20,11 +21,10 @@ class GradesRecord{
         }
     };
 
-    static async selectBySubject(){
+    static async selectBySubject(student_last_name){
       try{
-        const [results] = await pool.execute(`SELECT * FROM grades WHERE subject_id = ?`, [subject_id]);
-        
-      return results.map(obj => new GradesRecord(obj));
+        const [results] = await pool.execute(`SELECT * FROM grades WHERE student_last_name = ?`, [student_last_name]);
+      return results;
       } catch (error) {
         console.error('Error selecting grades:', error);
         throw error;

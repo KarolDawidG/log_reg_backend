@@ -28,7 +28,14 @@
             <br>
             <input class="forms-container__input" type="number" name="year" placeholder="Year" required min="1" max="5">
             <br>
-            <input class="forms-container__input" type="text" name="course" placeholder="Course" required>
+            <select class="forms-container__select" name="course" id="course" required>
+                <option value="">Select a course</option>
+                <option value="Informatyka">Informatyka</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="Full-stack">Full-stack</option>
+                <option value="Historia">Historia</option>
+            </select>
             <br>
             <button class="forms-container__button forms-container__button--add" type="submit">Dodaj</button>
         </form>
@@ -44,26 +51,33 @@
             </form>
             
         <h2 class="forms-container__title">Edit student</h2>
-        <form class="forms-container__form" action="/update-students" method="post">
-            <input class="forms-container__input" type="text" name="firstName" placeholder="First name" required>
-            <br>
-            <input class="forms-container__input" type="text" name="lastName" placeholder="Last name" required>
-            <br>
-            <input class="forms-container__input" type="text" name="email" placeholder="Email" required>
-            <br>
-            <input class="forms-container__input" type="number" name="year" placeholder="Year" required min="1" max="5">
-            <br>
-            <input class="forms-container__input" type="text" name="course" placeholder="Course" required>
-            <br>
-            <label class="forms-container__label" for="nrIndexu">Select the Student's Record Number to change</label>
-            <select class="forms-container__select" name="nrIndexu" id="nrIndexu">
-                {{#each students}}
-                    <option value="{{this.nrIndexu}}">{{this.nrIndexu}}</option>
-                {{/each}}
-            </select>
-            <br>
-            <input class="forms-container__button" type="submit" value="Update students">
-        </form>
+      <form class="forms-container__form" action="/update-students" method="post">
+    <input class="forms-container__input" type="text" name="firstName" placeholder="First name" required>
+    <br>
+    <input class="forms-container__input" type="text" name="lastName" placeholder="Last name" required>
+    <br>
+    <input class="forms-container__input" type="text" name="email" placeholder="Email" required>
+    <br>
+    <input class="forms-container__input" type="number" name="year" placeholder="Year" required min="1" max="5">
+    <br>
+    <select class="forms-container__select" name="course" id="course" required>
+                <option value="">Select a course</option>
+                <option value="Informatyka">Informatyka</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="Full-stack">Full-stack</option>
+                <option value="Historia">Historia</option>
+    </select>
+    <br>
+    <label class="forms-container__label" for="nrIndexu">Select the Student's Record Number to change</label>
+    <select class="forms-container__select" name="nrIndexu" id="nrIndexu">
+        {{#each students}}
+            <option value="{{this.nrIndexu}}">{{this.nrIndexu}}</option>
+        {{/each}}
+    </select>
+    <br>
+    <input class="forms-container__button" type="submit" value="Update students">
+</form>
     </div>
 </div>
 
