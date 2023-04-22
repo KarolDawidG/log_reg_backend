@@ -1,5 +1,4 @@
 const {pool} = require("../db");
-const { v4: uuidv4 } = require('uuid');
 
 class StudentsRecord{
     constructor(obj) {
@@ -21,15 +20,16 @@ class StudentsRecord{
         }
     };
 
-    static async selectBynrIndexu(nrIndexu){
-      try{
-        const [results] = await pool.execute('SELECT * FROM students WHERE nrIndexu = ?', nrIndexu);
-        return results;
+    static async selectStudentById(nrIndexu) {
+      try {
+        const [results] = await pool.execute('SELECT * FROM students WHERE nrIndexu = ?', [nrIndexu]);
+        return results.map(obj => new StudentsRecord(obj));
       } catch (error) {
-        console.error('Error selecting student by nrIndexu:', error);
+        console.error('Error selecting student:', error);
         throw error;
       }
     };
+    
 
     static async selectByCourse(course){
       try{
@@ -41,15 +41,6 @@ class StudentsRecord{
       }
     };
 
-    static async selectByFullName(firstName, lastName) {
-      try {
-        const [results] = await pool.execute('SELECT * FROM students WHERE firstName = ? AND lastName = ?', [firstName, lastName]);
-        return results;
-      } catch (error) {
-        console.error('Error selecting student by full name:', error);
-        throw error;
-      }
-    };
     
     static async delete(nrIndexu) {
       try {
@@ -102,6 +93,16 @@ class StudentsRecord{
       }
     };
     
+
+    static async selectByLastName(lastName) {
+      try {
+        const [results] = await pool.execute('SELECT * FROM students WHERE lastName = ?', [lastName]);
+        return results.map(obj => new StudentsRecord(obj));
+      } catch (error) {
+        console.error('Error selecting student:', error);
+        throw error;
+      }
+    };
   }
         
 module.exports = {

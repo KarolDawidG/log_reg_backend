@@ -9,12 +9,12 @@
 <body>
     <div class="forms-container">
     <div class="forms-container__create">
-          <form class="form" action="/grades" method="get">
-          <input class="form__btn" type="submit" value="Oceny">
+          <form class="form" action="/update-grade" method="get">
+            <input class="form__btn" type="submit" value="Oceny">
           </form>
 
           <form class="form" action="/subjects" method="get">
-          <input class="form__btn" type="submit" value="Przedmioty">
+            <input class="form__btn" type="submit" value="Przedmioty">
           </form>
           
         <h2 class="forms-container__title">Information about student</h2>
@@ -28,14 +28,12 @@
             <br>
             <input class="forms-container__input" type="number" name="year" placeholder="Year" required min="1" max="5">
             <br>
-            <select class="forms-container__select" name="course" id="course" required>
-                <option value="">Select a course</option>
-                <option value="Informatyka">Informatyka</option>
-                <option value="Frontend">Frontend</option>
-                <option value="Backend">Backend</option>
-                <option value="Full-stack">Full-stack</option>
-                <option value="Historia">Historia</option>
-            </select>
+
+                <select class="forms-container__select" name="course" id="course" required>
+                    {{#each teachers}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>  
             <br>
             <button class="forms-container__button forms-container__button--add" type="submit">Dodaj</button>
         </form>
@@ -60,14 +58,11 @@
     <br>
     <input class="forms-container__input" type="number" name="year" placeholder="Year" required min="1" max="5">
     <br>
-    <select class="forms-container__select" name="course" id="course" required>
-                <option value="">Select a course</option>
-                <option value="Informatyka">Informatyka</option>
-                <option value="Frontend">Frontend</option>
-                <option value="Backend">Backend</option>
-                <option value="Full-stack">Full-stack</option>
-                <option value="Historia">Historia</option>
-    </select>
+   <select class="forms-container__select" name="course" id="course" required>
+            {{#each teachers}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+    </select> 
     <br>
     <label class="forms-container__label" for="nrIndexu">Select the Student's Record Number to change</label>
     <select class="forms-container__select" name="nrIndexu" id="nrIndexu">
@@ -86,7 +81,7 @@
     <div class="table-container">
     <table class="table">
         <thead class="table__head">
-            <tr class="table__row">
+            <tr>
                 <th class="table__heading">Lp</th>
                 <th class="table__heading">Index No.</th>
                 <th class="table__heading">First Name</th>

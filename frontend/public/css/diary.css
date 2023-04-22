@@ -110,14 +110,24 @@ body {
   color: #fff;
 }
 
-.table__row:nth-child(even) {
-  background-color: #f2f2f2;
-}
 
-.table__heading,
+.table__heading {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
 .table__cell {
   padding: 10px;
   border: 1px solid #ddd;
+}
+
+/* Ustawienie co drugiego elementu na jaśniejszy kolor tła */
+.table__row:nth-child(even) {
+  background-color: grey; 
+}
+
+
+.table__row:nth-child(odd) {
+  background-color: wheat; 
 }
 
 .table__button {

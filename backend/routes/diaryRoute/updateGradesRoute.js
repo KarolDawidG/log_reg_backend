@@ -1,4 +1,5 @@
 const express = require('express');
+const {SubjectsRecord} = require("../../database/Records/SubjectsRecord");
 const {GradesRecord} = require("../../database/Records/GradesRecord");
 const {StudentsRecord} = require("../../database/Records/StudentsRecord");
 
@@ -9,37 +10,32 @@ router.use(middleware);
 router.get('/', async (req, res)=>{
     const grades = await GradesRecord.listAll();
     const AllastName = await StudentsRecord.getAllastName();
-    
-
-            res.status(200).render("home", { layout: "diary/update-grade", grades, AllastName });
+    const teachers = await SubjectsRecord.getAllastName();
+    res.status(200).render("home", { layout: "diary/update-grade", grades, AllastName, teachers });
 });
 
-// router.post('/', async (req, res) => {
-//     const { firstName, lastName, email, year, course } = req.body;
-    
-//      try {
-//        await StudentsRecord.insertStudent([firstName, lastName, email, year, course]);
-//        res.status(200).redirect('/classDiary/');
-//      } catch (error) {
-//        console.error(error);
-//        res.status(500).send('Unknown server error. Please contact your administrator.');
-//      }
-//   });
-  
-//   router.post('/delete/:id', async (req, res, next) => {
-//     const id = req.params.id;
-//     try {
-//        await StudentsRecord.delete(id);
-//        res.status(200).redirect('/classDiary/');
-//     } catch (error) {
-//        console.error(error);
-//        res.status(500).send('Something went wrong');
-//     }
-//  });
+router.post('/', async (req, res) => {
+
+    try {
+        const studentLastName = req.body.student_last_name; 
+        const grade = req.body.grade; 
+        const subject = req.body.subject;
+
+        const studentData = await StudentsRecord.selectByLastName(studentLastName); 
+        
+        const firstStudent = studentData[0]; 
+        const lastName= firstStudent.lastName; 
+        const studentID = firstStudent.nrIndexu;
+
+        await GradesRecord.insertGrade([studentID, lastName, subject, grade]);
 
 
 
-
+      res.status(200).redirect('/update-grade/');
+    } catch (error) {
+      console.error('Error updating grades:', error);
+      res.status(500).json({ error: 'Failed to update grades' });
+    }
+});
 
 module.exports = router;
-

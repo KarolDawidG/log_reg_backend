@@ -4,6 +4,9 @@ const crypto = require('crypto');
 
 const queryParameterize = /^[A-Za-z0-9]+$/;
 
+const generateRandomNumber = () => Math.floor(Math.random() * (15999 - 15000 + 1)) + 15000;
+
+
 const limiter = rateLimit({
     windowMs: 15*60*1000,   //15 minutes
     max: 99,                // limit each IP to 100 per windowMs
@@ -47,4 +50,5 @@ module.exports = {
     publicKey,
     privateKey,
     queryParameterize,
+    generateRandomNumber,
 };

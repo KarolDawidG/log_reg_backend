@@ -19,7 +19,7 @@ const pool = createPool({
         await pool.query(`CREATE DATABASE ${nameDB}`);
       }
         await pool.query(`USE ${nameDB}`);
-        const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable, createStudentGradesSubjects, createTriggedStudGradSub, deleteTriggedStudGradSub];
+        const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable];
       for await (const table of tables) {
         await table(pool);
       }console.log('Database started correctly');

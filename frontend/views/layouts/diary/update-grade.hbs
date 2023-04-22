@@ -7,40 +7,46 @@
 <body>
     <div class="forms-container">
 
+        <div class="forms-container__create">
+            <form class="forms-container__form" action="/update-grade" method="post">
+            <h2>Select student by last name to add grades</h2>
+                <select class="forms-container__select" name="student_last_name" id="student_last_name">
+                    {{#each AllastName}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            
+                <h3>Wybierz ocene</h3>
+                <select class="forms-container__select" name="grade" id="grade" required>
+                    <option value="">Grade</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
 
-    <div class="forms-container__create">
-        <form class="forms-container__form" action="/update-grades" method="post">
-        
-            <select class="forms-container__select" name="student_last_name" id="student_last_name">
-                {{#each AllastName}}
-                    <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-            <br>
-            <select class="forms-container__select" name="course" id="course" required>
-                <option value="">Grade</option>
-                <option value="grade">3</option>
-                <option value="grade">4</option>
-                <option value="grade">5</option>
-            </select>
-            <br>
-            <button class="forms-container__button forms-container__button--add" type="submit">Dodaj</button>
-        </form>
-    </div>
+                <h3>Wybierz nazwe przedmiotu:</h3>
+                <select class="forms-container__select" name="subject" id="subject" required>
+                    {{#each teachers}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>  
+                <br>
+
+                <button class="forms-container__button forms-container__button--add" type="submit">Dodaj ocene</button>
+            </form>
+        </div>
 
 </div>
 
-  
-  
+
     <div class="table-container">
     <table class="table">
         <thead class="table__head">
-            <tr class="table__row">
+            <tr>
                 <th class="table__heading">Lp</th>
                 <th class="table__heading">Student ID</th>
-                <th class="table__heading">Subject ID</th>
+                <th class="table__heading">Subject</th>
                 <th class="table__heading">Last Name</th>
-                <th class="table__heading">Description</th>
                 <th class="table__heading">Grade</th>
                 
             </tr>
@@ -50,9 +56,8 @@
             <tr class="table__row">
                 <td class="table__cell">{{inc @index}}</td>
                 <td class="table__cell">{{student_id}}</td>
-                <td class="table__cell">{{subject_id}}</td>
+                <td class="table__cell">{{subject}}</td>
                 <td class="table__cell">{{student_last_name}}</td>
-                <td class="table__cell">{{description}}</td>
                 <td class="table__cell">{{grade}}</td>
             </tr>
             {{/each}}
@@ -60,10 +65,13 @@
     </table>
 </div>
 
+    <form class="form" action="/classDiary" method="get">
+        <input class="form__btn" type="submit" value="Go back!">
+    </form>
 
-
-
-
+    <form class="form" action="/logout" method="get">
+        <input class="form__btn" type="submit" value="Logoutt">
+    </form>
 
     </body>
 </html>

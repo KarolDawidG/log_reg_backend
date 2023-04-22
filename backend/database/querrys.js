@@ -29,8 +29,7 @@ const createTasks = `
   const createSubjects  = `
   CREATE TABLE IF NOT EXISTS subjects (
     id INT(11) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(70) NOT NULL DEFAULT '',
-    description VARCHAR(500) NOT NULL DEFAULT '',
+    name VARCHAR(20) NOT NULL DEFAULT '',
     teacher VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -53,13 +52,12 @@ const createTasks = `
     id INT(11) NOT NULL AUTO_INCREMENT,
     student_id INT(6) NOT NULL,
     student_last_name VARCHAR(24) NOT NULL,
-    subject_id INT(11) NOT NULL,
+    subject VARCHAR(70) NOT NULL DEFAULT '',
     grade INT(3) NOT NULL,
-    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    timestamp DATE NOT NULL DEFAULT CURRENT_DATE,
     description VARCHAR(200) DEFAULT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (student_id) REFERENCES students(nrIndexu) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+    FOREIGN KEY (student_id) REFERENCES students(nrIndexu) ON DELETE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 `;
 

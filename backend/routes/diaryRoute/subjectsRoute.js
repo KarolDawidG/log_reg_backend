@@ -9,4 +9,18 @@ router.get('/', async (req, res, next) => {
             res.status(200).render("home", { layout: "diary/subjects", subjects });
     });
 
+
+router.post('/', async (req, res) => {
+    const name = req.body.name;
+    const teacher = req.body.teacher;
+
+
+    console.log(name);  
+    console.log(teacher); 
+    await SubjectsRecord.insert([name, teacher]);
+        
+    res.status(200).redirect('/subjects/');
+        
+    });
+
 module.exports = router;

@@ -1,14 +1,18 @@
 const express = require('express');
 const {StudentsRecord} = require("../../database/Records/StudentsRecord");
+const {SubjectsRecord} = require("../../database/Records/SubjectsRecord");
 const router = express.Router();
-const middleware = require('../../config/middleware')
+const middleware = require('../../config/middleware');
+const {generateRandomNumber} =require('../../config/config');
 
 router.use(middleware);
 
 
 router.get('/', async (req, res, next) => {
-    const students = await StudentsRecord.listAll();
-        res.status(200).render("home", { layout: "diary/diary", students });
+   const teachers = await SubjectsRecord.getAllastName();
+   const students = await StudentsRecord.listAll();
+   
+   res.status(200).render("home", { layout: "diary/diary", students, teachers });
 });
 
 router.post('/', async (req, res) => {

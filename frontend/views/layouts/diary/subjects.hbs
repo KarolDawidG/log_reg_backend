@@ -8,6 +8,7 @@
 
 <body> 
 
+ <div class="forms-container__create">
     <form class="form" action="/classDiary" method="get">
         <input class="form__btn" type="submit" value="Go back!">
     </form>
@@ -15,34 +16,39 @@
     <form class="form" action="/logout" method="get">
         <input class="form__btn" type="submit" value="Logoutt">
     </form>
+          
+        <h2 class="forms-container__title">Add subject</h2>
+        <form class="forms-container__form" action="/subjects" method="post">
+    
+            <input class="forms-container__input" type="text" name="name" placeholder="Name of subject" required>
+            <br>
+            <input class="forms-container__input" type="text" name="teacher" placeholder="Teacher" required>
+            <br>
+            
+            <button class="forms-container__button forms-container__button--add" type="submit">Dodaj</button>
+        </form>
+    </div>
 
-    <div class="table-container">
-        <table class="table">
-            <thead class="table__head">
-                <tr class="table__row">
-                    <th class="table__heading">Lp</th>
-                    <th class="table__heading">Name</th>
-                    <th class="table__heading">Description</th>
-                    <th class="table__heading">Teacher</th>
-                </tr>
-            </thead>
-            <tbody class="table__body">
-                {{#each subjects}}
-                <tr class="table__row">
-                    <td class="table__cell">{{inc @index}}</td>
-                    <td class="table__cell">{{name}}</td>
-                    <td class="table__cell">{{description}}</td>
-                    <td class="table__cell">{{teacher}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-    </table>
-</div>
-
-
-
-
-
+        <div class="table-container">
+                <table class="table">
+                    <thead class="table__head">
+                        <tr>
+                            <th class="table__heading">Lp</th>
+                            <th class="table__heading">Name</th>
+                            <th class="table__heading">Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table__body">
+                        {{#each subjects}}
+                        <tr class="table__row">
+                            <td class="table__cell">{{inc @index}}</td>
+                            <td class="table__cell">{{name}}</td>
+                            <td class="table__cell">{{teacher}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+            </table>
+        </div>
 
     </body>
 </html>
