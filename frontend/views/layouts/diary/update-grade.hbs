@@ -16,15 +16,15 @@
                     {{/each}}
                 </select>
             
-                <h3>Wybierz ocene</h3>
+                <h3>Choose a rating</h3>
                 <select class="forms-container__select" name="grade" id="grade" required>
                     <option value="">Grade</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-
-                <h3>Wybierz nazwe przedmiotu:</h3>
+                
+                <h3>Choose the name of the subject:</h3>
                 <select class="forms-container__select" name="subject" id="subject" required>
                     {{#each teachers}}
                         <option value="{{this}}">{{this}}</option>
@@ -32,7 +32,7 @@
                 </select>  
                 <br>
 
-                <button class="forms-container__button forms-container__button--add" type="submit">Dodaj ocene</button>
+                <button class="forms-container__button forms-container__button--add" type="submit">Add a rating</button>
             </form>
         </div>
 

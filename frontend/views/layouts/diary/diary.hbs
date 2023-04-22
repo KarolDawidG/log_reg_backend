@@ -45,7 +45,7 @@
             </form>
 
             <form class="form" action="/logout" method="get">
-                <input class="form__btn" type="submit" value="Logoutt">
+                <input class="form__btn" type="submit" value="Logout">
             </form>
             
         <h2 class="forms-container__title">Edit student</h2>
@@ -90,9 +90,9 @@
                 <th class="table__heading">Delete</th>
             </tr>
         </thead>
-        <div class="table-container__row">
+        
 
-                    <tbody class="table__body">
+            <tbody class="table__body">
             {{#each students}}
             <tr class="table__row"> 
                 <td class="table__cell">{{inc @index}}</td>
@@ -111,7 +111,6 @@
             {{/each}}
         </tbody>
 
-        </div>
     
     </table>
 </div>

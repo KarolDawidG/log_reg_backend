@@ -111,11 +111,8 @@ body {
 }
 
 
-.table__heading {
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-.table__cell {
+.table__heading, .table__cell {
+  text-align: center;
   padding: 10px;
   border: 1px solid #ddd;
 }
