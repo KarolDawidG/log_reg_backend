@@ -26,18 +26,19 @@ const createTasks = `
 
    
 
-  const createSubjects  = `
-  CREATE TABLE IF NOT EXISTS subjects (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(20) NOT NULL DEFAULT '',
-    teacher VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+    const createSubjects = `
+    CREATE TABLE IF NOT EXISTS subjects (
+      id CHAR(36) NOT NULL DEFAULT UUID(),
+      name VARCHAR(20) NOT NULL DEFAULT '',
+      teacher VARCHAR(50) NOT NULL,
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   `;
 
   const createStudents = `
   CREATE TABLE IF NOT EXISTS students (
-    nrIndexu INT(6) NOT NULL AUTO_INCREMENT,
+    id CHAR(36) NOT NULL DEFAULT UUID(),
+    nrIndexu INT(6) NOT NULL,
     firstName VARCHAR(16) NOT NULL DEFAULT '',
     lastName VARCHAR(24) NOT NULL DEFAULT '',
     email VARCHAR(24) NOT NULL DEFAULT '',
@@ -49,7 +50,7 @@ const createTasks = `
 
   const createGrades = `
   CREATE TABLE IF NOT EXISTS grades (
-    id INT(11) NOT NULL AUTO_INCREMENT,
+    id CHAR(36) NOT NULL DEFAULT UUID(),
     student_id INT(6) NOT NULL,
     student_last_name VARCHAR(24) NOT NULL,
     subject VARCHAR(70) NOT NULL DEFAULT '',
@@ -61,10 +62,11 @@ const createTasks = `
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 `;
 
+//for now, the following data is not used
 
   const student_grades_subjects   = `
   CREATE TABLE IF NOT EXISTS student_grades_subjects (
-    id INT(11) NOT NULL AUTO_INCREMENT,
+    id CHAR(36) NOT NULL DEFAULT UUID(),
     student_last_name VARCHAR(24) NOT NULL,
     grade INT(3) NOT NULL,
     subject_id INT(11) NOT NULL,

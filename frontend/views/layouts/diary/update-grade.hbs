@@ -48,6 +48,7 @@
                 <th class="table__heading">Subject</th>
                 <th class="table__heading">Last Name</th>
                 <th class="table__heading">Grade</th>
+                <th class="table__heading">Delete</th>
                 
             </tr>
         </thead>
@@ -59,6 +60,11 @@
                 <td class="table__cell">{{subject}}</td>
                 <td class="table__cell">{{student_last_name}}</td>
                 <td class="table__cell">{{grade}}</td>
+                 <td class="table__cell">
+                    <form class="table__form" action="/update-grade/delete/{{this.id}}" method="POST">
+                        <input class="table__button table__button--delete" type="submit" value="Delete">
+                    </form>
+                </td>
             </tr>
             {{/each}}
         </tbody>

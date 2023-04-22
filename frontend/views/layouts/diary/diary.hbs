@@ -76,8 +76,6 @@
     </div>
 </div>
 
-  
-  
     <div class="table-container">
     <table class="table">
         <thead class="table__head">
@@ -92,9 +90,11 @@
                 <th class="table__heading">Delete</th>
             </tr>
         </thead>
-        <tbody class="table__body">
+        <div class="table-container__row">
+
+                    <tbody class="table__body">
             {{#each students}}
-            <tr class="table__row">
+            <tr class="table__row"> 
                 <td class="table__cell">{{inc @index}}</td>
                 <td class="table__cell">{{nrIndexu}}</td>
                 <td class="table__cell">{{firstName}}</td>
@@ -110,6 +110,9 @@
             </tr>
             {{/each}}
         </tbody>
+
+        </div>
+    
     </table>
 </div>
 

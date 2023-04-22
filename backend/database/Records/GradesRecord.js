@@ -19,37 +19,7 @@ class GradesRecord{
           console.error('Error selecting grades:', error);
           throw error;
         }
-    };
-
-    static async getID() {
-      try {
-        const [results] = await pool.execute('SELECT student_id FROM grades');
-        return results.map(obj => obj.name);
-      } catch (error) {
-        console.error('Error selecting getAllastName:', error);
-        throw error;
-      }
-    };
-
-    static async selectBySubject(student_last_name){
-      try{
-        const [results] = await pool.execute(`SELECT * FROM grades WHERE student_last_name = ?`, [student_last_name]);
-      return results;
-      } catch (error) {
-        console.error('Error selecting grades:', error);
-        throw error;
-      }
-  };
- 
-    static async delete(id) {
-      try {
-        await pool.execute("DELETE FROM grades WHERE id = ?", [id]);
-      } catch (error) {
-        console.error('Error deleting grades:', error);
-        throw error;
-      }
-    };
-    
+    }; 
 
     static async insertGrade( [student_id, student_last_name, subject, grade ] ) {
       try {
@@ -57,6 +27,15 @@ class GradesRecord{
         return result.insertId;
       } catch (error) {
         console.error('Error inserting student:', error);
+        throw error;
+      }
+    };
+
+    static async delete(id) {
+      try {
+        await pool.execute("DELETE FROM grades WHERE id = ?", [id]);
+      } catch (error) {
+        console.error('Error deleting grades:', error);
         throw error;
       }
     };

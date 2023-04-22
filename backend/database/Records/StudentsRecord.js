@@ -1,4 +1,6 @@
 const {pool} = require("../db");
+const {generateRandomNumber} =require('../../config/config');
+
 
 class StudentsRecord{
     constructor(obj) {
@@ -20,40 +22,10 @@ class StudentsRecord{
         }
     };
 
-    static async selectStudentById(nrIndexu) {
-      try {
-        const [results] = await pool.execute('SELECT * FROM students WHERE nrIndexu = ?', [nrIndexu]);
-        return results.map(obj => new StudentsRecord(obj));
-      } catch (error) {
-        console.error('Error selecting student:', error);
-        throw error;
-      }
-    };
-    
-
-    static async selectByCourse(course){
-      try{
-        const [results] = await pool.execute('SELECT * FROM students WHERE students = ?', course);
-        return results;
-      } catch (error) {
-        console.error('Error selecting student by course:', error);
-        throw error;
-      }
-    };
-
-    
-    static async delete(nrIndexu) {
-      try {
-        await pool.execute("DELETE FROM students WHERE nrIndexu = ?", [nrIndexu]);
-      } catch (error) {
-        console.error('Error deleting student:', error);
-        throw error;
-      }
-    };
-
     static async insertStudent( [firstName, lastName, email, year, course] ) {
       try {
-        const result = await pool.execute("INSERT INTO students ( firstName, lastName, email, year, course) VALUES ( ?, ?, ?, ?, ?)", [ firstName, lastName, email, year, course]);
+        const nrIndexu = generateRandomNumber();
+        const result = await pool.execute("INSERT INTO students (nrIndexu, firstName, lastName, email, year, course) VALUES ( ?, ?, ?, ?, ?, ?)", [nrIndexu, firstName, lastName, email, year, course]);
         return result.insertId;
       } catch (error) {
         console.error('Error inserting student:', error);
@@ -71,17 +43,6 @@ class StudentsRecord{
         throw error;
       }
     };
-    
-
-    static async getAllNrIndexes() {
-      try {
-        const [results] = await pool.execute('SELECT nrIndexu FROM students');
-        return results.map(obj => obj.nrIndexu);
-      } catch (error) {
-        console.error('Error selecting nrIndexes:', error);
-        throw error;
-      }
-    };
 
     static async getAllastName() {
       try {
@@ -92,7 +53,6 @@ class StudentsRecord{
         throw error;
       }
     };
-    
 
     static async selectByLastName(lastName) {
       try {
@@ -100,6 +60,15 @@ class StudentsRecord{
         return results.map(obj => new StudentsRecord(obj));
       } catch (error) {
         console.error('Error selecting student:', error);
+        throw error;
+      }
+    };
+
+    static async delete(nrIndexu) {
+      try {
+        await pool.execute("DELETE FROM students WHERE nrIndexu = ?", [nrIndexu]);
+      } catch (error) {
+        console.error('Error deleting student:', error);
         throw error;
       }
     };

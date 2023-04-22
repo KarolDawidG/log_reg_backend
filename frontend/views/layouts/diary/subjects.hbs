@@ -36,6 +36,7 @@
                             <th class="table__heading">Lp</th>
                             <th class="table__heading">Name</th>
                             <th class="table__heading">Teacher</th>
+                            <th class="table__heading">Delete</th>
                         </tr>
                     </thead>
                     <tbody class="table__body">
@@ -44,6 +45,11 @@
                             <td class="table__cell">{{inc @index}}</td>
                             <td class="table__cell">{{name}}</td>
                             <td class="table__cell">{{teacher}}</td>
+                            <td class="table__cell">
+                                <form class="table__form" action="/subjects/delete/{{this.id}}" method="POST">
+                                    <input class="table__button table__button--delete" type="submit" value="Delete">
+                                </form>
+                            </td>
                         </tr>
                         {{/each}}
                     </tbody>

@@ -38,7 +38,6 @@ class SubjectsRecord{
       }
     };
 
-
     static async delete(id) {
       try {
         await pool.execute("DELETE FROM subjects WHERE id = ?", [id]);
