@@ -19,6 +19,8 @@ const aiTranslate = require('./backend/routes/featuresRoute/aiTranslate');
 const classDiary = require('./backend/routes/diaryRoute/classDiaryRoute');
 const subjects = require('./backend/routes/diaryRoute/subjectsRoute');
 const updateGrades = require('./backend/routes/diaryRoute/updateGradesRoute');
+const test = require('./backend/routes/diaryRoute/testRoute');
+const filterRouter = require('./backend/routes/diaryRoute/testRouteFilter');
 
 app.set('views', path.join(__dirname, 'frontend/views'));
 app.engine('.hbs', hbs.engine({
@@ -44,6 +46,8 @@ app.use('/translate', aiTranslate );
 app.use('/classDiary', classDiary );
 app.use('/subjects', subjects );
 app.use('/update-grade', updateGrades);
+app.use('/test', test);
+app.use('/filter', filterRouter);
 
 app.use(limiter);
 app.use(middleware);

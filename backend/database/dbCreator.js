@@ -1,5 +1,5 @@
 const {insertRoot, findRoot, createTasks, createAccounts, createStudents, createSubjects,
-  createGrades, student_grades_subjects, insert_student_grades_subjects, delete_student_grades_subjects} = require('./querrys');
+  createGrades, student_grades_subjects, insert_student_grades_subjects, delete_student_grades_subjects, createTest} = require('./querrys');
 
   const createAccountsTable = async (pool) => {
     try {
@@ -80,6 +80,14 @@ const deleteTriggedStudGradSub = async (pool) => {
   } 
 };
 
+const createTableTest = async (pool) => {
+  try {
+    await pool.query(createTest);
+  } catch (err) {
+    console.error(err);
+  } 
+};
+
 module.exports = {
   createAccountsTable,
   createTasksTable,
@@ -90,4 +98,5 @@ module.exports = {
   createRoot,
   createTriggedStudGradSub,
   deleteTriggedStudGradSub,
+  createTableTest,
 }

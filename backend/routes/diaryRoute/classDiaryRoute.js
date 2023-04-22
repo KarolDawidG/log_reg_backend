@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res) => {
     const { firstName, lastName, email, year, course } = req.body;
      try {
-       await StudentsRecord.insertStudent([firstName, lastName, email, year, course]);
+       await StudentsRecord.insert([firstName, lastName, email, year, course]);
        res.status(200).redirect('/classDiary/');
      } catch (error) {
        console.error(error);

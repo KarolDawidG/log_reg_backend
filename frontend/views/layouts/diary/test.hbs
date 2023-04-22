@@ -1,0 +1,56 @@
+<!doctype html>
+<head>
+    <link rel="stylesheet" href="/css/diary.css">
+    <title>Subjects</title>
+</head>
+
+<body> 
+<div class="filter-container">
+    <form id="filter-form" class="filter-form">
+        <label for="marka-select">Filtruj według marki:</label>
+        <select id="marka-select" name="marka">
+            {{#each unique}}
+                <option value="{{this.marka}}">{{this.marka}}</option>
+            {{/each}}
+                <option value="">All cars</option>
+        </select>
+        <input type="submit" value="Filtruj">
+    </form>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead class="table__head">
+            <tr>
+                <th class="table__heading">marka</th>
+                <th class="table__heading">model</th>
+                <th class="table__heading">kolor</th>
+            </tr>
+        </thead>
+    <tbody class="table__body">
+        {{#each cars}}
+        <tr class="table__row"> 
+            <td class="table__cell">{{marka}}</td>
+            <td class="table__cell">{{model}}</td>
+            <td class="table__cell">{{kolor}}</td>
+        </tr>
+     {{/each}}
+    </tbody>
+    </table>
+</div>
+
+
+<script>
+    document.getElementById('filter-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        const marka = document.getElementById('marka-select').value;
+        if (marka === "") {window.location.href = `/test`;
+        }else{
+            window.location.href = `/filter?marka=${marka}`;
+        }
+    });
+</script>
+
+</body>
+</html>

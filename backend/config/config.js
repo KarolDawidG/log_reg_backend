@@ -4,6 +4,18 @@ const crypto = require('crypto');
 
 const queryParameterize = /^[A-Za-z0-9]+$/;
 
+const uniqueArray = arr => {
+  const uniqueArr = arr.reduce((acc, curr) => {
+    const marka = curr.marka;
+    if (!acc.some(obj => obj.marka === marka)) {
+      acc.push(curr);
+    }
+    return acc;
+  }, []);
+  return uniqueArr;
+};
+
+
 const generateRandomNumber = () => Math.floor(Math.random() * (15999 - 15000 + 1)) + 15000;
 
 const limiter = rateLimit({
@@ -50,4 +62,5 @@ module.exports = {
     privateKey,
     queryParameterize,
     generateRandomNumber,
+    uniqueArray,
 };

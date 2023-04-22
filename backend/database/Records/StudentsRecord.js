@@ -22,7 +22,7 @@ class StudentsRecord{
         }
     };
 
-    static async insertStudent( [firstName, lastName, email, year, course] ) {
+    static async insert( [firstName, lastName, email, year, course] ) {
       try {
         const nrIndexu = generateRandomNumber();
         const result = await pool.execute("INSERT INTO students (nrIndexu, firstName, lastName, email, year, course) VALUES ( ?, ?, ?, ?, ?, ?)", [nrIndexu, firstName, lastName, email, year, course]);
@@ -33,7 +33,7 @@ class StudentsRecord{
       }
     };
     
-    static async updateStudent(nrIndexu, { firstName, lastName, email, year, course }) {
+    static async update(nrIndexu, { firstName, lastName, email, year, course }) {
       try {
         const update = `UPDATE students SET firstName = ?, lastName = ?, email = ?, year = ?, course = ?
                          WHERE nrIndexu = ?`;

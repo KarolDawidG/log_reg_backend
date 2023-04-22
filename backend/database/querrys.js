@@ -62,6 +62,16 @@ const createTasks = `
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 `;
 
+const createTest = `
+    CREATE TABLE IF NOT EXISTS test (
+      id CHAR(36) NOT NULL DEFAULT UUID(),
+      marka VARCHAR(20) NOT NULL DEFAULT '',
+      model VARCHAR(20) NOT NULL DEFAULT '',
+      kolor VARCHAR(20) NOT NULL DEFAULT '',
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `;
+
 //for now, the following data is not used
 
   const student_grades_subjects   = `
@@ -108,5 +118,6 @@ module.exports = {
     student_grades_subjects,
     insert_student_grades_subjects,
     delete_student_grades_subjects,
+    createTest,
     
 }

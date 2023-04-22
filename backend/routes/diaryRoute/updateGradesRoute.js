@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
         const firstStudent = studentData[0]; 
         const lastName= firstStudent.lastName; 
         const studentID = firstStudent.nrIndexu;
-        await GradesRecord.insertGrade([studentID, lastName, subject, grade]);
+        await GradesRecord.insert([studentID, lastName, subject, grade]);
       res.status(200).redirect('/update-grade/');
     } catch (error) {
       console.error('Error updating grades:', error);

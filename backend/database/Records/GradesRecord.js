@@ -21,7 +21,7 @@ class GradesRecord{
         }
     }; 
 
-    static async insertGrade( [student_id, student_last_name, subject, grade ] ) {
+    static async insert( [student_id, student_last_name, subject, grade ] ) {
       try {
         const result = await pool.execute("INSERT INTO grades ( student_id, student_last_name, subject, grade) VALUES ( ?, ?, ?, ?)", [ student_id, student_last_name, subject, grade]);
         return result.insertId;

@@ -11,9 +11,6 @@ class TaskRecord{
         return result.insertId;
     }
 
-   
-      
-
     static async delete(id) {
          await pool.execute("DELETE FROM tasks WHERE id = ?", [id]);
     }

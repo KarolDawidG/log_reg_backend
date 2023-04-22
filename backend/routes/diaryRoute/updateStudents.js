@@ -17,7 +17,7 @@ router.get('/', async (req, res)=>{
 router.post('/', async (req, res) => {
     const { nrIndexu, firstName, lastName, email, year, course } = req.body;
     try {
-      await await StudentsRecord.updateStudent(nrIndexu, { firstName, lastName, email, year, course });
+      await await StudentsRecord.update(nrIndexu, { firstName, lastName, email, year, course });
       res.status(200).redirect('/classDiary/');
     } catch (error) {
       console.error(error);

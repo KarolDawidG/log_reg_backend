@@ -1,6 +1,6 @@
 const { createPool } = require('mysql2/promise');
 const { hostDB, userDB, passDB, nameDB } = require('../config/configENV');
-const { createAccountsTable, createTasksTable, createSubjectsTable, createStudentGradesSubjects, createGradesTable, createStudentsTable, createRoot, createTriggedStudGradSub, deleteTriggedStudGradSub} = require('./dbCreator');
+const { createAccountsTable, createTasksTable, createSubjectsTable, createStudentGradesSubjects, createGradesTable, createStudentsTable, createRoot, createTriggedStudGradSub, deleteTriggedStudGradSub, createTableTest} = require('./dbCreator');
 
 
 const pool = createPool({
@@ -19,7 +19,7 @@ const pool = createPool({
         await pool.query(`CREATE DATABASE ${nameDB}`);
       }
         await pool.query(`USE ${nameDB}`);
-        const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable];
+        const tables = [createAccountsTable, createTasksTable, createRoot, createStudentsTable, createSubjectsTable, createGradesTable, createTableTest];
       for await (const table of tables) {
         await table(pool);
       }console.log('Database started correctly');
