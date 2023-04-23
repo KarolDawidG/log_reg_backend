@@ -5,9 +5,15 @@ const middleware = require('../../config/middleware')
 const {user, pass, service} = require("../../config/configENV");
 router.use(middleware);
 
-router.get('/', (req, res)=>{
-    res.status(200).render('home', {layout : 'features/contact'});
-});
+router.get('/', (req, res) => {
+    try {
+      res.status(200).render('home', { layout: 'features/contact' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Unknown server error. Please contact your administrator.');
+    }
+  });
+  
 
 router.post('/', async (req, res)=>{
     const { email, name, subject, message } = req.body;

@@ -5,9 +5,9 @@ const router = express.Router();
 router.use(middleware);
 
 router.get('/', async (req, res)=>{
-    try{
+    try {
         res.status(200).redirect('/');
-    }catch(error){
+    } catch (error) {
         console.error(error);
         res.status(500).send('Unknown server error. Please contact your administrator.');
     }

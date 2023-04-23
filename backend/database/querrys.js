@@ -71,7 +71,8 @@ const createTest = `
       PRIMARY KEY (id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   `;
-
+  
+/////////////////////////////////////////////////////////
 //for now, the following data is not used
 
   const student_grades_subjects   = `
@@ -106,6 +107,7 @@ BEGIN
   AND student_last_name = OLD.student_last_name;
 END;
 `;
+/////////////////////////////////////////////////////////
 
 module.exports = {
     insertRoot,

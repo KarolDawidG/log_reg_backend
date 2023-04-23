@@ -5,16 +5,26 @@ const middleware = require('../../config/middleware')
 router.use(middleware);
 
 router.get('/', async (req, res, next) => {
-    const subjects = await SubjectsRecord.listAll();
-    res.status(200).render("home", { layout: "diary/subjects", subjects });
+    try {
+        const subjects = await SubjectsRecord.listAll();
+        res.status(200).render("home", { layout: "diary/subjects", subjects });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Unknown server error. Please contact your administrator.');
+    }
     });
-
 
 router.post('/', async (req, res) => {
     const name = req.body.name;
     const teacher = req.body.teacher;
-    await SubjectsRecord.insert([name, teacher]);
-    res.status(200).redirect('/subjects/'); 
+    try{
+        await SubjectsRecord.insert([name, teacher]);
+        res.status(200).redirect('/subjects/'); 
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send('Unknown server error. Please contact your administrator.');
+    }
     });
 
 router.post('/delete/:id', async (req, res, next) => {
@@ -24,7 +34,7 @@ router.post('/delete/:id', async (req, res, next) => {
         res.status(200).redirect('/subjects/');
     } catch (error) {
         console.error(error);
-        res.status(500).send('Something went wrong');
+        res.status(500).send('Unknown server error. Please contact your administrator.');
     }
 });
 

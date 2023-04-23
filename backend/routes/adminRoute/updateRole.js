@@ -16,13 +16,9 @@ router.get('/', async (req, res)=>{
 router.post('/', async (req, res) => {
     const user = req.body.username;
     const role = req.body.role;
-
     try {
-        const query = `UPDATE accounts
-                        SET role = '${role}'
-                        WHERE username = '${user}'
-                      `;
-        await pool.query(query);
+        const query = 'UPDATE accounts SET role = ? WHERE username = ?';
+        await pool.query(query, [role, user]);
         res.status(200).redirect('/users/');
     } catch (error) {
         console.error(error);

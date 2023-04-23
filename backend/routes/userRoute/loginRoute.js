@@ -54,9 +54,7 @@ router.post("/", async (req, res) => {
           return res.status(200).render("home", { layout: "home" });
         }
       } else {
-        return res
-          .status(400)
-          .send("You can't just do a SQL Injection attack and think everything is fine");
+        return res.status(400).send("You can't just do a SQL Injection attack and think everything is fine");
       }
     } catch (error) {
       console.error(error);

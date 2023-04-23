@@ -7,10 +7,15 @@ const router = express.Router();
 router.use(middleware);
 
 router.get('/', async (req, res)=>{
-    const grades = await GradesRecord.listAll();
-    const AllastName = await StudentsRecord.getAllastName();
-    const teachers = await SubjectsRecord.getAllastName();
-    res.status(200).render("home", { layout: "diary/update-grade", grades, AllastName, teachers });
+    try {
+      const grades = await GradesRecord.listAll();
+      const AllastName = await StudentsRecord.getAllastName();
+      const teachers = await SubjectsRecord.getAllastName();
+      res.status(200).render("home", { layout: "diary/update-grade", grades, AllastName, teachers });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Unknown server error. Please contact your administrator.');
+  }
 });
 
 router.post('/', async (req, res) => {
@@ -26,7 +31,7 @@ router.post('/', async (req, res) => {
       res.status(200).redirect('/update-grade/');
     } catch (error) {
       console.error('Error updating grades:', error);
-      res.status(500).json({ error: 'Failed to update grades' });
+      res.status(500).send('Unknown server error. Please contact your administrator.');
     }
 });
 
@@ -37,7 +42,7 @@ router.post('/delete/:id', async (req, res, next) => {
       res.status(200).redirect('/update-grade/');
   } catch (error) {
       console.error(error);
-      res.status(500).send('Something went wrong');
+      res.status(500).send('Unknown server error. Please contact your administrator.');
   }
 });
 

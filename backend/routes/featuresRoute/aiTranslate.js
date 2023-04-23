@@ -10,7 +10,8 @@ router.get('/', async (req, res, next) => {
     try {
         res.status(200).render("home", { layout: "features/appTranslation" });
     } catch (error) {
-        console.error(error)
+        console.error(error);
+        res.status(500).send('Unknown server error. Please contact your administrator.');
     }
 });
 
@@ -35,7 +36,7 @@ router.post('/', async (req, res, next) => {
         res.status(200).json({ output: data.choices[0].message.content });
     } catch (error){
         console.error(error)
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).send('Unknown server error. Please contact your administrator.');
     }
 });
 

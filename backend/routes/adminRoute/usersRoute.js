@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
       res.status(200).render('home', {layout : 'features/users', usersList});
    } catch (error) {
       console.error(error);
-      res.status(500).send('Something went wrong');
+      res.status(500).send('Unknown server error. Please contact your administrator.');
    }
 });
 
@@ -22,7 +22,7 @@ router.post('/delete/:id', async (req, res, next) => {
       res.status(200).redirect('/users/');
    } catch (error) {
       console.error(error);
-      res.status(500).send('Something went wrong');
+      res.status(500).send('Unknown server error. Please contact your administrator.');
    }
 });
 

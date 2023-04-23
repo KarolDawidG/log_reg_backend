@@ -6,9 +6,14 @@ const middleware = require('../../config/middleware');
 router.use(middleware);
 
 router.get('/', async (req, res, next) => {
-   const teachers = await SubjectsRecord.getAllastName();
-   const students = await StudentsRecord.listAll();
-   res.status(200).render("home", { layout: "diary/diary", students, teachers });
+   try {
+      const teachers = await SubjectsRecord.getAllastName();
+      const students = await StudentsRecord.listAll();
+      res.status(200).render("home", { layout: "diary/diary", students, teachers });
+   } catch  (error) {
+      console.error(error);
+      res.status(500).send('Unknown server error. Please contact your administrator.');
+   }
 });
 
 router.post('/', async (req, res) => {
@@ -29,7 +34,7 @@ router.post('/', async (req, res) => {
        res.status(200).redirect('/classDiary/');
     } catch (error) {
        console.error(error);
-       res.status(500).send('Something went wrong');
+       res.status(500).send('Unknown server error. Please contact your administrator.');
     }
  });
 

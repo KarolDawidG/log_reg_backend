@@ -16,7 +16,7 @@ To instal app:
 1. npm init -y
 2. npm install package.json
 3. you need to add and configure .env file
-4. to scripts add "start": "nodemon app.js"
+4. to scripts add: "start": "nodemon app.js"
 5. the database will be set automatically
 
 This project has only one direct purpose, learning to code.
