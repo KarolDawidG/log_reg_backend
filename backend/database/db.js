@@ -1,6 +1,6 @@
 const { createPool } = require('mysql2/promise');
 const { hostDB, userDB, passDB, nameDB } = require('../config/configENV');
-const { createAccountsTable, createTasksTable, createSubjectsTable, createStudentGradesSubjects, createGradesTable, createStudentsTable, createRoot, createTriggedStudGradSub, deleteTriggedStudGradSub, createTableTest} = require('./dbCreator');
+const { createAccountsTable, createTasksTable, createSubjectsTable, createGradesTable, createStudentsTable, createRoot, createTableTest} = require('./dbCreator');
 
 
 const pool = createPool({
